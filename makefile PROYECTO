@@ -1,0 +1,23 @@
+
+FLAGS = -std=c++11 -O3
+#INCLUDE = -Ideps/include/SDL2 -ISDL2
+#LIBS = -Ldeps/lib/x64 -Lx64 -lSDL2 -lSDL2main
+
+SDL_INCLUDE = -ISDL2-2.0.4\i686-w64-mingw32\include\SDL2
+SDL_LIBS = -LSDL2-2.0.4\i686-w64-mingw32\lib
+
+SDL_IMAGE_INCLUDE = -ISDL2_image-2.0.1\i686-w64-mingw32\include\SDL2
+SDL_IMAGE_LIBS = -LSDL2_image-2.0.1\i686-w64-mingw32\lib
+
+SDL_MIXER_INCLUDE = -ISDL2_mixer-2.0.1\i686-w64-mingw32\include\SDL2
+SDL_MIXER_LIBS = -LSDL2_mixer-2.0.1\i686-w64-mingw32\lib
+
+
+EXTRA_LIBRARIES = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer
+INCLUDE_ALL = ${SDL_INCLUDE} ${SDL_IMAGE_INCLUDE} ${SDL_MIXER_INCLUDE}
+LIBS_ALL = ${SDL_LIBS} ${SDL_IMAGE_LIBS} ${SDL_MIXER_LIBS}
+
+
+
+test: main.cpp
+	g++ -o demo ${FLAGS} ${INCLUDE_ALL} ${LIBS_ALL} ${EXTRA_LIBRARIES} main.cpp
