@@ -4,18 +4,25 @@
 
 #ifndef PROYECTO_BOARD_H
 #define PROYECTO_BOARD_H
-#define DOMINOESPERPLAYER 5
+#define DOMINOESPERPLAYER 5 //El numero de dominoes por jugador
+#define CASHPERPLAYER 2000 //La cantidad de dinero por jugador
 
 #include "Player.h"
 #include <vector>
+using std::vector;
+
+class Player;
+
+//Help and global functions
+void printDominoes(vector<Domino> tempDominoes);//Imprime un vector de dominoes organizadamente
+Player bestDominoPlayer(vector<Player>* players);//Escoje el jugador con mayor ficha
+Player whosGotTheMagicDomino(vector<Player>* players);//Escoje el jugador con la pareja de domino mayor
+int getPlayerIdx(vector<Player>* players, Player* player);//Retorna el index de un jugador
 
 class Board{
-    //Pila: Los dominoes para cojer de la mesa
-    vector<Domino> dominoesToEat;
+
     //Los Jugadores tienen un orden para jugar
     vector<Player> players;
-    //Los dominoes que estan en juego en la mesa
-    vector<Domino> dominoesAtPlay;
 
     vector<Domino> mixedDominoes();//Revuelve los dominoes
     vector<Player> createPlayers(unsigned int nPlayers);
@@ -23,7 +30,13 @@ class Board{
     void orderOfPlayers();//Define el orden de los jugadores
 
 public:
+    //Pila: Los dominoes para cojer de la mesa
+    vector<Domino> dominoesToEat;
+    //Los dominoes que estan en juego en la mesa
+    vector<Domino> dominoesAtPlay;//Los dominoes en la mesa que ya se han puesto
+
     Board(unsigned int nPlayers);//INITIALIZATION of Board
+    void update();//toma los inputs y define que haces. pone a jugar al personaje que le toca el turno si escogido.
 };
 
 #endif //PROYECTO_BOARD_H

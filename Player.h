@@ -9,20 +9,26 @@
 #include <string>
 #include "Domino.h"
 #include "Board.h"
+#include <iostream>
 
 using std::vector;
 using std::string;
+using std::cin;
+using std::cout;
+using std::endl;
 
 //Referencia circular
 class Board;
 
 class Player{
-    string name;
 public:
+    string name;
     int cash;
     vector<Domino> dominoes;//Las fichas del jugador
 
-    void addDominoe(Domino domino);
+    Player();
+
+    vector<Domino> getPlayableDominoes(Board board);//Dice que dominoes pueden ser jugados por el jugador
     void placeDominoe(Board board);//Coloca una ficha en el tablero y se quita de 'dominoes'
     void eat(Board board);//Come un domino de los dominoes que se pueden comer
 

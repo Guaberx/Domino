@@ -22,7 +22,7 @@ int mainC(){
     SOCKADDR_IN ADDRESS;
 
     SOCKET  sock;
-    sock = socket(AF_INET,SOCK_STREAM,NULL);//NULL or 0
+    sock = socket(AF_INET,SOCK_STREAM,0);//NULL or 0
 
     ADDRESS.sin_addr.s_addr  = inet_addr("127.0.0.1");
     ADDRESS.sin_family = AF_INET;

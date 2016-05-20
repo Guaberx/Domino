@@ -1,0 +1,10 @@
+En main.cpp:
+	agrege la funcion OptimizeSurface() que optimiza una surface.
+
+En player.cpp:
+	se diseno el metodo para agregar las fichas al tablero(esta comentado arriba)
+	getPlayableDominoes() que escoje las fichas que puede jugar un jugador
+
+	Por hacer:
+		placeDominoe();//esta incompleta con unos comentarios. le falta
+		eat();sin desarrollar

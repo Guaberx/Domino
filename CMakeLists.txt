@@ -22,7 +22,7 @@ SET(LIBS_ALL ${SDL_LIBS} ${SDL_IMAGE_LIBS} ${SDL_MIXER_LIBS})
 INCLUDE_DIRECTORIES(${INCLUDE_ALL})
 LINK_DIRECTORIES(${LIBS_ALL})
 
-add_executable(Proyecto main.cpp SERVER.h SERVER.cpp CLIENT.h CLIENT.cpp Domino.h Player.h Board.h Game.h Board.cpp Domino.cpp)####################
+add_executable(Proyecto main.cpp SERVER.h SERVER.cpp CLIENT.h CLIENT.cpp Domino.h Player.h Board.h Game.h Board.cpp Domino.cpp Player.cpp)####################
 
 TARGET_LINK_LIBRARIES(Proyecto ${EXTRA_LIBRARIES})
 
