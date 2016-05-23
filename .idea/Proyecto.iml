@@ -7,14 +7,15 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Game.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CLIENT.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CLIENT.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Player.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SERVER.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CLIENT.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Domino.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Board.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Board.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Player.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Domino.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Graphics.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

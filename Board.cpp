@@ -22,7 +22,8 @@ Board::Board(unsigned int nPlayers){
 void printDominoes(vector<Domino> tempDominoes){
     //Imprime los dominoes de un vector de dominoes
     int organizer = 0;
-    std::cout << "\tFichas del Juego:"<<std::endl<<"\t";
+    //std::cout << "\tFichas del Juego:"<<std::endl<<"\t";
+    cout <<"\n\t";
     for (int k = 0; k < tempDominoes.size(); ++k) {
         std::cout << tempDominoes[k].getTop() << "," << tempDominoes[k].getBot() << "  ";
         organizer++;
@@ -179,3 +180,12 @@ void Board::orderOfPlayers(){
 
 }
 
+void Board::update() {
+    for (int i = 0; i < players.size(); ++i) {
+        cout << "\nDominoes at table : " << endl;
+        printDominoes(dominoesAtPlay);
+        cout << "\nPLAYS: " << players.at(i).name << endl;
+        players.at(i).update(this);
+        cout << "\n\nLast Player: " << lastPlayer->name << endl;
+    }
+}

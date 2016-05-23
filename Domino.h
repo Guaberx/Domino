@@ -5,6 +5,8 @@
 #ifndef PROYECTO_DOMINO_H
 #define PROYECTO_DOMINO_H
 
+#include <SDL.h>
+
 class Domino{
     unsigned int top;
     unsigned int bot;

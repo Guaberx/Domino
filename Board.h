@@ -8,6 +8,7 @@
 #define CASHPERPLAYER 2000 //La cantidad de dinero por jugador
 
 #include "Player.h"
+#include "Domino.h"
 #include <vector>
 using std::vector;
 
@@ -20,7 +21,7 @@ Player whosGotTheMagicDomino(vector<Player>* players);//Escoje el jugador con la
 int getPlayerIdx(vector<Player>* players, Player* player);//Retorna el index de un jugador
 
 class Board{
-
+public:
     //Los Jugadores tienen un orden para jugar
     vector<Player> players;
 
@@ -29,13 +30,29 @@ class Board{
     void dealDominoes();//Distribuye los dominoes a los jugadores
     void orderOfPlayers();//Define el orden de los jugadores
 
+    //El ultimo jugador en poner ficha. se utiliza para ver cuanto le pagan
+    int profit;
+    Player *lastPlayer;
+
 public:
     //Pila: Los dominoes para cojer de la mesa
     vector<Domino> dominoesToEat;
     //Los dominoes que estan en juego en la mesa
     vector<Domino> dominoesAtPlay;//Los dominoes en la mesa que ya se han puesto
 
-    Board(unsigned int nPlayers);//INITIALIZATION of Board
+    void dominoesAtPlayINSETR(int idx, Domino* whatToADD){
+        dominoesAtPlay.insert(dominoesAtPlay.begin()+idx,*whatToADD);
+    }
+    void dominoesAtPlayERASE(int idx, Domino* whatToADD){
+    }
+    void dominoesToEatINSETR(int idx, Domino* whatToADD){
+        dominoesAtPlay.insert(dominoesAtPlay.begin()+idx,*whatToADD);
+    }
+    void dominoesToEatERASE(int idx, Domino* whatToADD){
+    }
+
+    Board(unsigned int nPlayers);//CONSTRUCTOR of Board
+
     void update();//toma los inputs y define que haces. pone a jugar al personaje que le toca el turno si escogido.
 };
 

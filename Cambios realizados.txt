@@ -7,4 +7,4 @@ En player.cpp:
 
 	Por hacer:
 		placeDominoe();//esta incompleta con unos comentarios. le falta
-		eat();sin desarrollar
+		eat();sin desarrollar2

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)###################
 project(Proyecto)###################
 
 
-set(SOURCE_FILES main.cpp)###################
+set(SOURCE_FILES main.cpp images)###################
 
 SET(FLAGS "-std=c++11 -O3")
 
@@ -22,7 +22,7 @@ SET(LIBS_ALL ${SDL_LIBS} ${SDL_IMAGE_LIBS} ${SDL_MIXER_LIBS})
 INCLUDE_DIRECTORIES(${INCLUDE_ALL})
 LINK_DIRECTORIES(${LIBS_ALL})
 
-add_executable(Proyecto main.cpp SERVER.h SERVER.cpp CLIENT.h CLIENT.cpp Domino.h Player.h Board.h Game.h Board.cpp Domino.cpp Player.cpp)####################
+add_executable(Proyecto main.cpp SERVER.h SERVER.cpp CLIENT.h CLIENT.cpp Domino.h Player.h Board.h Game.h Board.cpp Domino.cpp Player.cpp Graphics.h)####################
 
 TARGET_LINK_LIBRARIES(Proyecto ${EXTRA_LIBRARIES})
 
