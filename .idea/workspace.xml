@@ -13,7 +13,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a30e9db-9a68-4cf8-b7cf-4e121a730fae" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Domino design.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/00.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/03.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/10.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/11.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/12.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/13.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/14.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/20.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/23.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/24.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/25.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/26.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/30.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/31.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/33.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/35.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/36.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/40.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/41.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/42.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/43.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/45.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/46.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/50.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/51.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/52.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/53.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/54.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/55.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/56.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/60.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/61.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/62.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/63.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/64.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/65.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/Dominoes/TEST/66.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/Domino design-Recovered-Recovered.psd" afterPath="$PROJECT_DIR$/images/Domino design-Recovered-Recovered.psd" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Board.cpp" afterPath="$PROJECT_DIR$/Board.cpp" />
@@ -47,8 +95,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+            <state relative-caret-position="154">
+              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -56,69 +104,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Graphics.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Graphics.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Graphics.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="129" column="26" selection-start-line="129" selection-start-column="26" selection-end-line="129" selection-end-column="26" />
+            <state relative-caret-position="196">
+              <caret line="75" column="81" selection-start-line="75" selection-start-column="81" selection-end-line="75" selection-end-column="81" />
               <folding>
                 <element signature="e#234#250#0" expanded="true" />
-                <element signature="e#421#3434#1" expanded="false" />
-                <marker date="1464071477646" expanded="false" signature="2356:3432" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Domino.h" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Domino.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-              <folding>
-                <element signature="e#145#161#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Player.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Player.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding>
-                <element signature="e#436#621#0" expanded="false" />
-                <element signature="e#670#2193#0" expanded="false" />
-                <element signature="e#2195#2449#0" expanded="false" />
-                <element signature="e#2451#7638#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Board.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Board.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1297">
-              <caret line="208" column="45" selection-start-line="208" selection-start-column="45" selection-end-line="208" selection-end-column="45" />
-              <folding>
-                <element signature="e#3649#4028#0" expanded="false" />
-                <element signature="e#4030#4843#0" expanded="false" />
-                <element signature="e#4845#6160#0" expanded="false" />
-                <element signature="e#6162#7042#0" expanded="false" />
-                <element signature="e#7044#7449#0" expanded="false" />
-                <element signature="e#7451#8107#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,8 +119,8 @@
       <file leaf-file-name="Board.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Board.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+            <state relative-caret-position="139">
+              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
               <folding>
                 <element signature="e#222#241#0" expanded="true" />
               </folding>
@@ -136,12 +128,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Domino.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Domino.cpp">
+      <file leaf-file-name="Board.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Board.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="413">
+              <caret line="214" column="28" selection-start-line="214" selection-start-column="28" selection-end-line="214" selection-end-column="28" />
+              <folding>
+                <element signature="e#537#1119#0" expanded="false" />
+                <element signature="e#3821#4200#0" expanded="false" />
+                <element signature="e#4202#5015#0" expanded="false" />
+                <element signature="e#5017#6332#0" expanded="false" />
+                <element signature="e#6334#7214#0" expanded="false" />
+                <element signature="e#7216#7621#0" expanded="false" />
+                <element signature="e#7623#8279#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Player.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Player.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="232" column="51" selection-start-line="232" selection-start-column="51" selection-end-line="232" selection-end-column="51" />
+              <folding>
+                <element signature="e#689#2212#0" expanded="false" />
+                <element signature="e#7946#14925#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -150,7 +173,7 @@
         <entry file="file://$PROJECT_DIR$/Game.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
               <folding>
                 <element signature="e#93#110#0" expanded="true" />
               </folding>
@@ -176,14 +199,14 @@
         <option value="$PROJECT_DIR$/BOR.h" />
         <option value="$PROJECT_DIR$/ExtraFunctions.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/Board.h" />
-        <option value="$PROJECT_DIR$/Domino.h" />
-        <option value="$PROJECT_DIR$/Board.cpp" />
-        <option value="$PROJECT_DIR$/Player.cpp" />
         <option value="$PROJECT_DIR$/Game.h" />
-        <option value="$PROJECT_DIR$/main.cpp" />
-        <option value="$PROJECT_DIR$/Graphics.h" />
+        <option value="$PROJECT_DIR$/Domino.h" />
+        <option value="$PROJECT_DIR$/Board.h" />
+        <option value="$PROJECT_DIR$/Board.cpp" />
         <option value="$PROJECT_DIR$/Player.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/Player.cpp" />
+        <option value="$PROJECT_DIR$/Graphics.h" />
       </list>
     </option>
   </component>
@@ -196,7 +219,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1378" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -476,20 +499,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19196428" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19253731" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31423897" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2700491" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2487725" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25531915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31751227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21502976" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39443535" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38134205" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -498,6 +521,26 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45662847" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2487725" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23240589" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19196428" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21502976" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31751227" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -512,7 +555,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="19" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -772,10 +815,10 @@
     <entry file="file://$PROJECT_DIR$/MOTHEFUCKINGBOARD.h" />
     <entry file="file://$PROJECT_DIR$/BOR.h" />
     <entry file="file://$PROJECT_DIR$/ExtraFunctions.h" />
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/Cambios realizados.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="148" selection-start-line="24" selection-start-column="148" selection-end-line="24" selection-end-column="148" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -788,27 +831,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Board.h">
+    <entry file="file://$PROJECT_DIR$/Domino.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+        <state relative-caret-position="158">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
           <folding>
-            <element signature="e#222#241#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Board.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1297">
-          <caret line="208" column="45" selection-start-line="208" selection-start-column="45" selection-end-line="208" selection-end-column="45" />
-          <folding>
-            <element signature="e#3649#4028#0" expanded="false" />
-            <element signature="e#4030#4843#0" expanded="false" />
-            <element signature="e#4845#6160#0" expanded="false" />
-            <element signature="e#6162#7042#0" expanded="false" />
-            <element signature="e#7044#7449#0" expanded="false" />
-            <element signature="e#7451#8107#0" expanded="false" />
+            <element signature="e#145#161#0" expanded="true" />
+            <element signature="e#1260#1536#0" expanded="false" />
+            <element signature="e#1541#1635#0" expanded="false" />
+            <element signature="e#1640#1737#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -816,70 +847,82 @@
     <entry file="file://$PROJECT_DIR$/Game.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
           <folding>
             <element signature="e#93#110#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Board.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="214" column="28" selection-start-line="214" selection-start-column="28" selection-end-line="214" selection-end-column="28" />
+          <folding>
+            <element signature="e#537#1119#0" expanded="false" />
+            <element signature="e#3821#4200#0" expanded="false" />
+            <element signature="e#4202#5015#0" expanded="false" />
+            <element signature="e#5017#6332#0" expanded="false" />
+            <element signature="e#6334#7214#0" expanded="false" />
+            <element signature="e#7216#7621#0" expanded="false" />
+            <element signature="e#7623#8279#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Board.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding>
+            <element signature="e#222#241#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="148" selection-start-line="24" selection-start-column="148" selection-end-line="24" selection-end-column="148" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+        <state relative-caret-position="154">
+          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Graphics.h">
+    <entry file="file://$PROJECT_DIR$/Player.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="129" column="26" selection-start-line="129" selection-start-column="26" selection-end-line="129" selection-end-column="26" />
-          <folding>
-            <element signature="e#234#250#0" expanded="true" />
-            <element signature="e#421#3434#1" expanded="false" />
-            <marker date="1464071477646" expanded="false" signature="2356:3432" ph="{...}" />
-          </folding>
+        <state relative-caret-position="3">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Player.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="250">
+          <caret line="232" column="51" selection-start-line="232" selection-start-column="51" selection-end-line="232" selection-end-column="51" />
           <folding>
-            <element signature="e#436#621#0" expanded="false" />
-            <element signature="e#670#2193#0" expanded="false" />
-            <element signature="e#2195#2449#0" expanded="false" />
-            <element signature="e#2451#7638#0" expanded="false" />
+            <element signature="e#689#2212#0" expanded="false" />
+            <element signature="e#7946#14925#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cambios realizados.txt">
+    <entry file="file://$PROJECT_DIR$/Graphics.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Player.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Domino.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        <state relative-caret-position="196">
+          <caret line="75" column="81" selection-start-line="75" selection-start-column="81" selection-end-line="75" selection-end-column="81" />
           <folding>
-            <element signature="e#145#161#0" expanded="true" />
+            <element signature="e#234#250#0" expanded="true" />
           </folding>
         </state>
       </provider>

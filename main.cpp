@@ -36,13 +36,11 @@ int main(int argc, char * argv[]) {
     SDL_Renderer* Main_Renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
     srand(time(NULL));//Initialize random seed for rand()
-    Game* juego = new Game(window,Main_Renderer,3);//Nuevo juego con 3 Jugadores. es un puntero para poder crear juegos nuevos
     Graphics graphics(window,Main_Renderer);
+    Game* juego = new Game(window,Main_Renderer,&graphics,3);//Nuevo juego con 3 Jugadores. es un puntero para poder crear juegos nuevos
 
     //Se meten imagenes para renderizarlas
     GraphicOBJ Background(window,Main_Renderer,"images/Background.png",0,0,RESOLUTION_W,RESOLUTION_H);
-    GraphicOBJ popo(window,Main_Renderer,"images/Ball.bmp",0,0,253,196);
-    GraphicOBJ popo2(window,Main_Renderer,"images/Ball.bmp",300,200,253,196);
     /*
      *
      */
@@ -57,24 +55,13 @@ int main(int argc, char * argv[]) {
             if(ev.type == SDL_QUIT){
                 isRunning = false;
             }
-            if(ev.type == SDL_MOUSEBUTTONDOWN){
-                //Para las imagenes
-                if(ev.button.x >= popo.getDestRect()->x && ev.button.x <popo.getDestRect()->x+popo.getDestRect()->w
-                        && ev.button.y >= popo.getDestRect()->y && popo.getDestRect()->y + popo.getDestRect()->h){
-                    cout <<"\n\tPresionaste el tablero?";
-                }
-            }
         }
         //Game logic
         //Update graficos
         //ADD Graphic object to render TODO It is a must to add the graphicOBJ everyloop!!!!
         graphics.imagesToRenderPUSH_BACK(Background);
-        graphics.imagesToRenderPUSH_BACK(popo);
-        graphics.imagesToRenderPUSH_BACK(popo2);
-        //Remder
-        graphics.render(1);//TA FUNCIONA//El 1 es para que haga flip en las texturas
-        //Clean graphics objects
-        //juego->update();
+        juego->update();
+        //graphics.render(1);//TA FUNCIONA//El 1 es para que haga flip en las texturas
     }
 
     SDL_Delay(20);

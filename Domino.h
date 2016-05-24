@@ -17,16 +17,24 @@ class Domino{
 public:
     Domino(unsigned int top, unsigned int bot):top(top),bot(bot){
     }
-    void createDominoImagen(SDL_Window* window, SDL_Renderer* renderer,string imagePath){
+    void createDominoImage(SDL_Window* window, SDL_Renderer* renderer,string imagePath){
         //Crea un nuevo GraphicOBJ
         //Inicializamos el domino con su Graphic object
-        graphicOBJ = new GraphicOBJ(window,renderer,imagePath,0,0,DOMINOSIZE_W,DOMINOSIZE_H);
-
+        graphicOBJ = new GraphicOBJ(window,renderer,imagePath,100,100,DOMINOSIZE_W,DOMINOSIZE_H);
     }
     unsigned int getTop();//Retorna el valor de la cara de arriba del domino
     unsigned int getBot();//Retorna el valor de la cara de abajo domino
     void setTop(unsigned int topNew);
     void setBot(unsigned int botNew);
+
+
+    GraphicOBJ* getGraphicOBJ(){
+        return graphicOBJ;
+    }
+
+    void graphicOBJToRenderer(Graphics* graphics){
+        graphics->imagesToRenderPUSH_BACK(*graphicOBJ);
+    }
 
     void setTexture(SDL_Window* window,SDL_Renderer* renderer,string imagePath){
         //Para cambiar la ficha de domino(Greaficamente)

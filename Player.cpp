@@ -19,9 +19,9 @@
 
 
 template <class T>
-bool is_in(T elem,vector<T>* v){
+bool is_in(T* elem,vector<T>* v){
     for (int i = 0; i < v->size() ; ++i) {
-        if(elem == v->at(i)){
+        if(*elem == v->at(i)){
             return true;
         }
     }
@@ -30,6 +30,7 @@ bool is_in(T elem,vector<T>* v){
 
 Player::Player(){
     cash = CASHPERPLAYER;
+    ate = false;
 }
 
 vector<Domino> Player::getPlayableDominoes(Board* board) {
@@ -69,9 +70,9 @@ vector<Domino> Player::getPlayableDominoes(Board* board) {
     return dominoesToPlay;
 }
 
-int getDominoIdx(vector<Domino> vDominoes, Domino Ddomino){
-    for (int i = 0; i < vDominoes.size(); ++i) {
-        if(vDominoes.at(i).getTop() == Ddomino.getTop() && vDominoes.at(i).getBot() == Ddomino.getBot()){
+int getDominoIdx(vector<Domino>* vDominoes, Domino* Ddomino){
+    for (int i = 0; i < vDominoes->size(); ++i) {
+        if(vDominoes->at(i) == *Ddomino){
             return i;
         }
     }
@@ -89,6 +90,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
                     imagePath = "images/dominoes/10.png";
                     break;
                 case 1:
+                    imagePath = "images/dominoes/11.png";
                     break;
                 case 2:
                     imagePath = "images/dominoes/12.png";
@@ -116,6 +118,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
                     imagePath = "images/dominoes/21.png";
                     break;
                 case 2:
+                    imagePath = "images/dominoes/22.png";
                     break;
                 case 3:
                     imagePath = "images/dominoes/23.png";
@@ -143,6 +146,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
                     imagePath = "images/dominoes/32.png";
                     break;
                 case 3:
+                    imagePath = "images/dominoes/33.png";
                     break;
                 case 4:
                     imagePath = "images/dominoes/34.png";
@@ -170,6 +174,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
                     imagePath = "images/dominoes/43.png";
                     break;
                 case 4:
+                    imagePath = "images/dominoes/44.png";
                     break;
                 case 5:
                     imagePath = "images/dominoes/45.png";
@@ -197,6 +202,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
                     imagePath = "images/dominoes/54.png";
                     break;
                 case 5:
+                    imagePath = "images/dominoes/55.png";
                     break;
                 case 6:
                     imagePath = "images/dominoes/56.png";
@@ -224,6 +230,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
                     imagePath = "images/dominoes/65.png";
                     break;
                 case 6:
+                    imagePath = "images/dominoes/66.png";
                     break;
             }
             break;
@@ -231,7 +238,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
     dominoes.at(idxDomino).setTexture(window,renderer,imagePath);//TODO
 }
 
-void Player::placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board){
+bool Player::placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board, Domino* pickedDomino){
     //Hacer algun metodo de SDL para que escoja la ficha
     //Mostrar en el chat las fichas disponibles o hacerlo de algun metodo
     vector<Domino> possible = getPlayableDominoes(board);
@@ -240,45 +247,89 @@ void Player::placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board
     if(board->dominoesAtPlay.empty()){//En el caso que se este comenzando la partida. el movimiento es automatico
         cout << name << " ha comenzado la partida con la fica: " << possible.at(0).getTop() <<", " << possible.at(0).getBot() << endl;
         board->dominoesAtPlayINSETR(0,&possible.at(0));//Se agrega el domino al tablero
-        dominoes.erase(dominoes.begin()+getDominoIdx(dominoes,possible.at(0)));//Borramos el domino correcpondiente del jugador
-        return;
+        dominoes.erase(dominoes.begin()+getDominoIdx(&dominoes,&possible.at(0)));//Borramos el domino correcpondiente del jugador
+        return true;
+    }
+    cout << name << " :\n";
+    //printDominoes(dominoes);
+    printDominoes(board->dominoesAtPlay);
+
+    if(!is_in(pickedDomino,&possible)){
+        return false;
     }
 
-    //Escoje la ficha a poner
-    int pick = -1;//Se inicializa en -1 para poder entrar al do while
-    do{
-        cout << name << " Pick a domino!\n";
-        cout << "\n\tFichas que tienes:\n";
-        printDominoes(dominoes);
-        cout << "\n\tDominos que sirven:\n";
-        printDominoes(possible);
-        cout << "\nEscoje un domino: ";
-        cin >> pick;
-    }while (pick<0 || pick>possible.size()-1);//             POR ALGUNA RAZON FUNCIONA :|. si le pongo pick<0 falla. O.o
+    int possibleIdx = getDominoIdx(&possible,pickedDomino);
+    int dominoesIdx = getDominoIdx(&dominoes,pickedDomino);
 
+    board->playerInTurn = false;
+    ate = false;
 
-    //Escoje a que lado se pone la ficha
-    int idxDomino = getDominoIdx(dominoes,possible.at(pick));//POPO
+    //Booleanos para comprovar las conexiones con las fichas del tablero
     bool top_top, bot_top, top_bot, bot_bot;
-    top_top = dominoes.at(idxDomino).getTop() == board->dominoesAtPlay.at(0).getTop();//top<->top primer elemento (0)
-    bot_top = dominoes.at(idxDomino).getBot() == board->dominoesAtPlay.at(0).getTop();//bot<->top primer elemento (0)
-    top_bot = dominoes.at(idxDomino).getTop() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//top<->bot ultimo elemento (1)
-    bot_bot = dominoes.at(idxDomino).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//bot<->bot ultimo elemento (1)
-    pick = -1;//Reseteamos pick
-    do{
-        cout << name << " Ha escojido escojido:\n";
-        cout << "\t" << dominoes.at(idxDomino).getTop() << "," << dominoes.at(idxDomino).getBot() << endl;
-        cout << "\tDominoes en el tablero:\n";
-        printDominoes(board->dominoesAtPlay);
-        cout << name << " Pick a side, 0:Left  1:Right\n";
-        cin >> pick;
-        if (pick == 0 &&(top_top || bot_top)){
-            break;
+    top_top = dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(0).getTop();//top<->top primer elemento (0)
+    bot_top = dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(0).getTop();//bot<->top primer elemento (0)
+    top_bot = dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//top<->bot ultimo elemento (1)
+    bot_bot = dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//bot<->bot ultimo elemento (1)
+
+    //Checkea a que lado poner la ficha
+    bool pickingDomino = true;
+    SDL_Event ev1;
+    while(pickingDomino){
+        while(SDL_PollEvent(&ev1) != 0) {
+            if (ev1.type == SDL_QUIT) exit(0);
+            if (ev1.type == SDL_MOUSEBUTTONDOWN) {
+                GraphicOBJ* tempGraphicOBJ = board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getGraphicOBJ();
+                //Si el mouse da click a la derecha de las fichas.
+                if(ev1.button.x > tempGraphicOBJ->getDestRect()->x + tempGraphicOBJ->getDestRect()->w){
+                    if(top_bot || bot_bot){
+                        //TODO AQUI LOGICA DE QUE HACE AL VALIDAR ESTE LADO
+                        if(dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()){
+                            //Se cambia el orden de los valores del domino para que se inserte correctamente
+                            short tempDominoNumber = dominoes.at(dominoesIdx).getTop();
+                            dominoes.at(dominoesIdx).setTop(dominoes.at(dominoesIdx).getBot());
+                            dominoes.at(dominoesIdx).setBot(tempDominoNumber);
+
+                            //Se cambia la textura del domino //TODO
+                            rotateDomino(window,renderer,board,dominoesIdx);
+                        }
+                        //Insertamos el domino en el tablero
+                        board->dominoesAtPlayINSETR(board->dominoesAtPlay.size(),&dominoes.at(dominoesIdx));
+                        //Borramos el domino de nuestras fichas
+                        dominoes.erase(dominoes.begin()+dominoesIdx);
+                        //Actualizamos el ultimo jugador
+                        board->lastPlayer = this;
+                        pickingDomino = false;
+                        break;
+                    }
+                    //Si el mouse da click a la izquierda de las fichas.
+                }else if(ev1.button.x < tempGraphicOBJ->getDestRect()->x){
+                    if(top_top || bot_top){
+                        //TODO AQUI LOGICA DE QUE HACE AL VALIDAR ESTE LADO
+                        if(dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(0).getTop()){
+                            //Se cambia el orden de los valores del domino para que se inserte correctamente
+                            short tempDominoNumber = dominoes.at(dominoesIdx).getTop();
+                            dominoes.at(dominoesIdx).setTop(dominoes.at(dominoesIdx).getBot());
+                            dominoes.at(dominoesIdx).setBot(tempDominoNumber);
+
+                            //Se cambia la textura del domino //TODO
+                            rotateDomino(window,renderer,board,dominoesIdx);
+                        }
+                        //Insertamos el domino en el tablero
+                        board->dominoesAtPlayINSETR(0,&dominoes.at(dominoesIdx));
+                        //Borramos el domino de nuestras fichas
+                        dominoes.erase(dominoes.begin()+dominoesIdx);
+                        //Actualizamos el ultimo jugador
+                        board->lastPlayer = this;
+                        pickingDomino = false;
+                        break;
+                    }
+                }
+            }
+            SDL_Delay(50);
         }
-        if (pick == 1 &&(top_bot || bot_bot)){
-            break;
-        }
-    }while (true);
+    }
+    cout << "FUNCTION ENDS!!!\n";
+    /*//Escoje a que lado se pone la ficha
 
     //Poner ficha en el tablero
     switch (pick){
@@ -310,7 +361,7 @@ void Player::placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board
             break;
     }
     dominoes.erase(dominoes.begin()+getDominoIdx(dominoes,possible.at(0)));//Borramos el domino correcpondiente del jugador
-}
+*/}
 
 void Player::eat(SDL_Window* window,SDL_Renderer*renderer,Board* board){
     //El jugador se come el primer domino de la pila de dominoes para comer
@@ -319,34 +370,85 @@ void Player::eat(SDL_Window* window,SDL_Renderer*renderer,Board* board){
     dominoes.push_back(tempDomino);
     //DominoesToEat.Pop()
     board->dominoesToEat.erase(board->dominoesToEat.begin()+0);
-    //We check again
-    if(board->dominoesAtPlay.at(0).getTop()== tempDomino.getTop() || board->dominoesAtPlay.at(0).getTop()==tempDomino.getBot()
-            || board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()==tempDomino.getBot()
-               || board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()==tempDomino.getTop()){
-
-        //Si la ficha que comio la puede jugar. entonces la juega
-        placeDominoe(window,renderer,board);
-        board->lastPlayer = this;
-    }else{
-        //En el caso que no le sirva la ficha. paga
-        cash-=500;
-        board->profit+=500;
-    }
+    ate = true;
 }
 
-void Player::update(SDL_Window* window,SDL_Renderer*renderer,Board* board) {
-    //Si el jugador come una ficha y le funciona, puede ponerla. sino, pasa y paga
-    //El jugador solo reclama el dinero cuando no ha comido.
-    //es decir que si como y puede poner la ficha, igual no reclama el dinero. solo lo reclama cuanto juega de una
-    if(getPlayableDominoes(board).empty()){
-        cout << name << " Ate a Domino" << endl;
-        eat(window,renderer,board);
+void Player::update(SDL_Window* window,SDL_Renderer*renderer,Graphics* graphics,Board* board) {
+    //TODO muss man noch ein bischen auf die funktionen bearbeiten!!!! die funktionen komprimieren und dann separieren. reduzieren maximale möglich
+    //TODO Unhance Event and everything
+
+    //TODO Event checker
+        //Este caso solo se va a dar con el jugador que tenga la ficha que comienza
+    if(board->dominoesAtPlay.empty()){
+        placeDominoe(window,renderer,board,NULL);
+        //Termina turno
+        board->playerInTurn = false;
     }else{
-        cash+=board->profit;
-        board->profit = 0;
-        placeDominoe(window,renderer,board);
-        board->lastPlayer = this;
+        if(getPlayableDominoes(board).empty()){//No puede poner ficha
+            if(ate){
+                cash-=500;
+                board->profit+=500;
+                board->playerInTurn = false;
+                ate = false;//reseteamos si ha comido fucha porque termina su turno
+            }else
+            eat(window,renderer,board);
+        }else{//Osea puede poner ficha
+            SDL_Event ev;
+            while(SDL_PollEvent(&ev) != 0) {
+                if (ev.type == SDL_QUIT) exit(0);
+                if (ev.type == SDL_MOUSEBUTTONDOWN) {
+                    //Para las imagenes
+                    for (int k = 0; k < dominoes.size(); ++k) {
+                        //Si se encuentra dentro de las dimensiones del objeto
+                        if (ev.button.x >= dominoes.at(k).getGraphicOBJ()->getDestRect()->x && ev.button.x < dominoes.at(
+                                k).getGraphicOBJ()->getDestRect()->x + dominoes.at(k).getGraphicOBJ()->getDestRect()->w
+                            && ev.button.y >= dominoes.at(k).getGraphicOBJ()->getDestRect()->y && ev.button.y <= dominoes.at(
+                                k).getGraphicOBJ()->getDestRect()->y + dominoes.at(k).getGraphicOBJ()->getDestRect()->h) {
+                            //TODO AQUI LO QUE PASA!!!
+                            placeDominoe(window,renderer,board,&dominoes.at(k));
+                        }
+                    }
+                }
+            }
+        }
+        //Termina turno
+        //board->playerInTurn = false;
     }
+
+
+
+    //TODO Modifi the rects of the OBJs
+    //Render Dominoes
+    int modifier = 0;//Sirve para colocar los objetos en la pantalla ordenadamente
+    for (int j = 0; j < dominoes.size(); ++j) {
+        int wOfRect = dominoes.at(j).getGraphicOBJ()->getDestRect()->w;
+        int hOfRect = dominoes.at(j).getGraphicOBJ()->getDestRect()->h;
+        dominoes.at(j).getGraphicOBJ()->modifyDestRect(300+modifier,450,wOfRect,hOfRect);
+        modifier += 30;
+    }
+
+    //We add the dominoes graphicOBJS to graphics
+    for (int i = 0; i < dominoes.size(); ++i) {
+        graphics->imagesToRenderPUSH_BACK(*dominoes.at(i).getGraphicOBJ());
+    }
+
+
+    //Render DominoesAtPlay
+    modifier = 0;
+    for (int j = 0; j < board->dominoesAtPlay.size(); ++j) {
+        int wOfRect = board->dominoesAtPlay.at(j).getGraphicOBJ()->getDestRect()->w;
+        int hOfRect = board->dominoesAtPlay.at(j).getGraphicOBJ()->getDestRect()->h;
+        board->dominoesAtPlay.at(j).getGraphicOBJ()->modifyDestRect(300+modifier,300,wOfRect,hOfRect);
+        modifier += 30;
+    }
+
+    //We add the dominoes graphicOBJS to graphics
+    for (int i = 0; i < board->dominoesAtPlay.size(); ++i) {
+        graphics->imagesToRenderPUSH_BACK(*board->dominoesAtPlay.at(i).getGraphicOBJ());
+    }
+
+    //We render the OBJs
+    graphics->render(1);
 }
 
 

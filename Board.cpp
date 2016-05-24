@@ -10,10 +10,14 @@
 using std::cout;
 using std::endl;
 
-Board::Board(SDL_Window* windowI,SDL_Renderer* rendererI,unsigned int nPlayers){
+Board::Board(SDL_Window* windowI,SDL_Renderer* rendererI,Graphics* graphicsI, unsigned int nPlayers){
     //Constructor
+    playerInTurn = true;
+    lastPlayer = NULL;
+    profit = 0;
     window = windowI;
     renderer = rendererI;
+    graphics = graphicsI;
     dominoesToEat = mixedDominoes();
     players = createPlayers(nPlayers);
     dealDominoes();
@@ -64,9 +68,11 @@ vector<Domino> Board::mixedDominoes(){
         for (int j = 0; j <= i; ++j) {
             tempDomino.setTop(i);
             tempDomino.setBot(j);
-            tempDomino.createDominoImagen(window,renderer,dominoesPath.at(i));
             tempDominoes.push_back(tempDomino);
         }
+    }
+    for (int k = 0; k < tempDominoes.size(); ++k) {
+        tempDominoes.at(k).createDominoImage(window,renderer,dominoesPath.at(k));
     }
 
     int randomNumber;
@@ -203,10 +209,12 @@ void Board::orderOfPlayers(){
 
 void Board::update() {
     for (int i = 0; i < players.size(); ++i) {
-        cout << "\nDominoes at table : " << endl;
+        /*cout << "\nDominoes at table : " << endl;
         printDominoes(dominoesAtPlay);
-        cout << "\nPLAYS: " << players.at(i).name << endl;
-        players.at(i).update(window,renderer,this);
-        cout << "\n\nLast Player: " << lastPlayer->name << endl;
+        cout << "\nPLAYS: " << players.at(i).name << endl;*/
+        playerInTurn = true;
+        while(playerInTurn)
+        players.at(i).update(window,renderer,graphics,this);
+        //TODO cout << "\n\nLast Player: " << lastPlayer->name << endl;
     }
 }

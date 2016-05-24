@@ -22,20 +22,27 @@ class Board;
 
 class Player{
 public:
+    bool ate;//Si ya comio una ficha en su turno
     string name;
     int cash;
     vector<Domino> dominoes;//Las fichas del jugador
 
     Player();
     vector<Domino> getPlayableDominoes(Board* board);//Dice que dominoes pueden ser jugados por el jugador
-    void placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board);//Coloca una ficha en el tablero y se quita de 'dominoes'
+    bool placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board, Domino* pickedDomino);//Coloca una ficha en el tablero y se quita de 'dominoes'
     void eat(SDL_Window* window,SDL_Renderer*renderer,Board* board);//Come un domino de los dominoes que se pueden comer
 
     //Graphics
-    Graphics* graphics;//Objeto para hacer renderizado de los dominoes
     void rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board, unsigned int idxDomino);
 
-    void update(SDL_Window* window,SDL_Renderer*renderer,Board* board);//Es booleano para usarlo en board
+    void renderPlayerDominoes(Graphics* graphics){
+        //Mete todos los objetos a renderizar en graphics
+        for (int i = 0; i < dominoes.size(); ++i) {
+            graphics->imagesToRenderPUSH_BACK(*dominoes.at(i).getGraphicOBJ());
+        }
+    }
+    //TODO
+    void update(SDL_Window* window,SDL_Renderer*renderer,Graphics* grafics,Board* board);//Es booleano para usarlo en board
 
     //Overloadin operators
     bool operator ==(const Player& other){

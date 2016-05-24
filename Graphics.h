@@ -27,26 +27,10 @@ class GraphicOBJ{
     SDL_Texture* texture;//We use this one to render on the screen
 public:
     GraphicOBJ(SDL_Window* window, SDL_Renderer* renderer,string imagePath, int x, int y, int w, int h){
-        //We load a surface
-        //*SDL_Surface* windowSurfaceTemp = SDL_GetWindowSurface(window);
-        //*SDL_Surface* loadingSurface = OptimizeSurface(imagePath, windowSurfaceTemp);
-        //Define rect for size, position of the image src
-        srcR.x = x;
-        srcR.y = y;
-        srcR.w = w;
-        srcR.h = h;
-        //Define rect for size, position of the image dest
-        DestR.x = x;
-        DestR.y = y;
-        DestR.w = w;
-        DestR.h = h;
+        modifySrcRect(x,y,w,h);
+        modifyDestRect(x,y,w,h);
         //Make the texture
-        //*texture = SDL_CreateTextureFromSurface(renderer,loadingSurface);
         setTextureFromPath(window,renderer,imagePath);
-        //Free surface
-        //*SDL_FreeSurface(loadingSurface);
-        //TODO Free WindowSurface
-        //*SDL_FreeSurface(windowSurfaceTemp);
     }
     ~GraphicOBJ(){
         //Free memory
@@ -56,6 +40,21 @@ public:
     }
     SDL_Rect* getDestRect(){
         return &DestR;
+    }
+
+    void modifySrcRect(int x, int y, int w, int h){
+        //Define rect for size, position of the image src
+        DestR.x = x;
+        DestR.y = y;
+        DestR.w = w;
+        DestR.h = h;
+    }
+    void modifyDestRect(int x, int y, int w, int h){
+        //Define rect for size, position of the image dest
+        DestR.x = x;
+        DestR.y = y;
+        DestR.w = w;
+        DestR.h = h;
     }
 
     SDL_Texture* getTexture(){
@@ -73,7 +72,8 @@ public:
     //Optimiza los surfaces para el tamano adecuado. utilizar al usar una imagen o algo con surface!!!!
     static SDL_Surface* OptimizeSurface(std::string filePath, SDL_Surface* windowSurface){
         SDL_Surface* optimizedSurface = NULL;
-        SDL_Surface* surface = IMG_Load(filePath.c_str());
+        //SDL_RWops* test; test = SDL_RWFromFile(filePath.c_str(),"rb");//TODO HAD TO DO SOME CHANGES CUZ OF DLL
+        SDL_Surface* surface = IMG_Load(filePath.c_str());//IMG_LoadPNG_RW(test);
         int imageFlags = IMG_INIT_JPG;
         //if(IMG_Init(imageFlags) != imageFlags){
         if((IMG_Init(imageFlags) && imageFlags)){
@@ -116,18 +116,27 @@ public:
         imagesToRender.push_back(obj);
     }
 
-    void render(short clearVector){
+    void render(bool clearVector){
         //clartVector defines if the render itself is going to clear imagesToRender vector(1:clean, 0:not clean)
         //Screen render
         //First we blit the objects
+        if(window == NULL || Main_Renderer == NULL){
+            cout <<"Se ha producido un error renderizando"<<endl;
+            exit(1);
+        }
         for (int i = 0; i < imagesToRender.size(); ++i) {
             SDL_RenderCopy(Main_Renderer,imagesToRender.at(i).getTexture(),
                            NULL,imagesToRender.at(i).getDestRect());
         }
         //The function that makes a flip
         SDL_RenderPresent(Main_Renderer);
+        SDL_Delay(20);
         if(clearVector)
             cleanVector();
+    }
+
+    vector<GraphicOBJ> getVector(){
+        return imagesToRender;
     }
 
     void cleanVector(){
