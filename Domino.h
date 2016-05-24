@@ -6,10 +6,12 @@
 #define PROYECTO_DOMINO_H
 
 #include <SDL.h>
+#include "Graphics.h"
 
 class Domino{
     unsigned int top;
     unsigned int bot;
+    GraphicOBJ* dibujodomino;
 public:
     Domino(unsigned int top, unsigned int bot):top(top),bot(bot){}
     unsigned int getTop();//Retorna el valor de la cara de arriba del domino

@@ -10,27 +10,16 @@
 
 //Game.h porque es lo que vamos a renderizar
 #include <SDL.h>
+#include <SDL_image.h>
+#include <iostream>
 #include <cstdlib>
-//Optimiza los surfaces para el tamano adecuado. utilizar al usar una imagen o algo con surface!!!!
-SDL_Surface* OptimizeSurface(std::string filePath, SDL_Surface* windowSurface){
-    SDL_Surface* optimizedSurface = NULL;
-    SDL_Surface* surface = SDL_LoadBMP(filePath.c_str());
+#include <vector>
 
-    if(surface == NULL){
-        cout << "Error cargando Surface: " << SDL_GetError() << endl;
-    }else{
-        //Se convierte al formato correcto para usarlo
-        //BMP vienen normalmente en 24 bits. pero vamos a usar diferentes en la pantalla
-        //Por lo que toca cambiarle el formato.
-        optimizedSurface = SDL_ConvertSurface(surface,windowSurface->format,0);
-        if(optimizedSurface == NULL){
-            cout << "Error cargando Optimized Surface: " << SDL_GetError() << endl;
-        }
-    }
-    SDL_FreeSurface(surface);//Borramos el contenido del apuntador
-    surface = NULL;//Buenas practicas
-    return optimizedSurface;
-}
+using std::string;
+using std::cout;
+using std::endl;
+using std::cin;
+using std::vector;
 
 class GraphicOBJ{
     SDL_Surface* loadingSurface;
@@ -73,6 +62,32 @@ public:
     SDL_Texture* getTexture(){
         return texture;
     }
+
+    //Optimiza los surfaces para el tamano adecuado. utilizar al usar una imagen o algo con surface!!!!
+    static SDL_Surface* OptimizeSurface(std::string filePath, SDL_Surface* windowSurface){
+        SDL_Surface* optimizedSurface = NULL;
+        SDL_Surface* surface = IMG_Load(filePath.c_str());
+        int imageFlags = IMG_INIT_JPG;
+        //if(IMG_Init(imageFlags) != imageFlags){
+        if((IMG_Init(imageFlags) && imageFlags)){
+            cout << "Ha ocurrido un error cargando la imagen: " << filePath << " " << IMG_GetError << endl;
+        }
+
+        if(surface == NULL){
+            cout << "Error cargando Surface: " << SDL_GetError() << endl;
+        }else{
+            //Se convierte al formato correcto para usarlo
+            //BMP vienen normalmente en 24 bits. pero vamos a usar diferentes en la pantalla
+            //Por lo que toca cambiarle el formato.
+            optimizedSurface = SDL_ConvertSurface(surface,windowSurface->format,0);
+            if(optimizedSurface == NULL){
+                cout << "Error cargando Optimized Surface: " << SDL_GetError() << endl;
+            }
+        }
+        SDL_FreeSurface(surface);//Borramos el contenido del apuntador
+        surface = NULL;//Buenas practicas
+        return optimizedSurface;
+    }
 };
 
 class Graphics{
@@ -99,10 +114,14 @@ public:
         //First we blit the objects
         for (int i = 0; i < imagesToRender.size(); ++i) {
             SDL_RenderCopy(Main_Renderer,imagesToRender.at(i).getTexture(),
-                           imagesToRender.at(i).getSrcRect(),imagesToRender.at(i).getDestRect());
+                           NULL,imagesToRender.at(i).getDestRect());
         }
         //The function that makes a flip
         SDL_RenderPresent(Main_Renderer);
+    }
+
+    void cleanVector(){
+        imagesToRender.clear();
     }
 };
 

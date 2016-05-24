@@ -30,20 +30,22 @@ int main(int argc, char * argv[]) {
         exit(1);
     }
     //Creamos la ventana
-    //SDL_Window* window = SDL_CreateWindow(TITTLE,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,
-    //                           RESOLUTION_W,RESOLUTION_H,SDL_WINDOW_OPENGL);
+    SDL_Window* window = SDL_CreateWindow(TITTLE,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,
+                               RESOLUTION_W,RESOLUTION_H,SDL_WINDOW_OPENGL);
     //Creamos el renderer
-    //SDL_Renderer* Main_Renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+    SDL_Renderer* Main_Renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
     srand(time(NULL));//Initialize random seed for rand()
     Game* juego = new Game(3);//Nuevo juego con 3 Jugadores. es un puntero para poder crear juegos nuevos
-    //Graphics graphics(window,Main_Renderer);
+    Graphics graphics(window,Main_Renderer);
 
     //Se meten imagenes para renderizarlas
-    //GraphicOBJ Background(window,Main_Renderer,"images/TEMPLATE.bmp",0,0,RESOLUTION_W,RESOLUTION_H);
-    //GraphicOBJ popo(window,Main_Renderer,"images/Ball.bmp",RESOLUTION_W/2,RESOLUTION_H/2,RESOLUTION_W,RESOLUTION_H);
-    //graphics.imagesToRenderPUSH_BACK(Background);
-    //graphics.imagesToRenderPUSH_BACK(popo);
+    GraphicOBJ Background(window,Main_Renderer,"images/Background.png",0,0,RESOLUTION_W,RESOLUTION_H);
+    GraphicOBJ popo(window,Main_Renderer,"images/Ball.bmp",0,0,253,196);
+    GraphicOBJ popo2(window,Main_Renderer,"images/Ball.bmp",300,200,253,196);
+    /*
+     *
+     */
 
 
     bool isRunning = true;
@@ -56,12 +58,24 @@ int main(int argc, char * argv[]) {
                 isRunning = false;
             }
             if(ev.type == SDL_MOUSEBUTTONDOWN){
-                cout <<"\n\tQuieres pene?";
+                //Para las imagenes
+                if(ev.button.x >= popo.getDestRect()->x && ev.button.x <popo.getDestRect()->x+popo.getDestRect()->w
+                        && ev.button.y >= popo.getDestRect()->y && popo.getDestRect()->y + popo.getDestRect()->h){
+                    cout <<"\n\tPresionaste el tablero?";
+                }
             }
         }
         //Game logic
-        juego->update();
-        //graphics.render();//TA FUNCIONA
+        //Update graficos
+        //ADD Graphic object to render
+        graphics.imagesToRenderPUSH_BACK(Background);
+        graphics.imagesToRenderPUSH_BACK(popo);
+        graphics.imagesToRenderPUSH_BACK(popo2);
+        //Remder
+        graphics.render();//TA FUNCIONA
+        //Clean graphics objects
+        graphics.cleanVector();
+        //juego->update();
     }
 
     SDL_Delay(20);
