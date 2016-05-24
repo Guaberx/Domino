@@ -4,6 +4,8 @@
 
 #ifndef PROYECTO_DOMINO_H
 #define PROYECTO_DOMINO_H
+#define DOMINOSIZE_W 25
+#define DOMINOSIZE_H 60
 
 #include <SDL.h>
 #include "Graphics.h"
@@ -11,13 +13,25 @@
 class Domino{
     unsigned int top;
     unsigned int bot;
-    GraphicOBJ* dibujodomino;
+    GraphicOBJ* graphicOBJ;
 public:
-    Domino(unsigned int top, unsigned int bot):top(top),bot(bot){}
+    Domino(unsigned int top, unsigned int bot):top(top),bot(bot){
+    }
+    void createDominoImagen(SDL_Window* window, SDL_Renderer* renderer,string imagePath){
+        //Crea un nuevo GraphicOBJ
+        //Inicializamos el domino con su Graphic object
+        graphicOBJ = new GraphicOBJ(window,renderer,imagePath,0,0,DOMINOSIZE_W,DOMINOSIZE_H);
+
+    }
     unsigned int getTop();//Retorna el valor de la cara de arriba del domino
     unsigned int getBot();//Retorna el valor de la cara de abajo domino
     void setTop(unsigned int topNew);
     void setBot(unsigned int botNew);
+
+    void setTexture(SDL_Window* window,SDL_Renderer* renderer,string imagePath){
+        //Para cambiar la ficha de domino(Greaficamente)
+        graphicOBJ->setTextureFromPath(window,renderer,imagePath);
+    }
 
 
     //Operator overloading so it can compare

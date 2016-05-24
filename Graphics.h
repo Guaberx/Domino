@@ -22,15 +22,14 @@ using std::cin;
 using std::vector;
 
 class GraphicOBJ{
-    SDL_Surface* loadingSurface;
     SDL_Rect srcR;//Source image rectangle
     SDL_Rect DestR;//Destination rectangle
     SDL_Texture* texture;//We use this one to render on the screen
 public:
-    GraphicOBJ(SDL_Window* window, SDL_Renderer* Main_Renderer,string imagePath, int x, int y, int w, int h){
+    GraphicOBJ(SDL_Window* window, SDL_Renderer* renderer,string imagePath, int x, int y, int w, int h){
         //We load a surface
-        SDL_Surface* windowSurfaceTemp = SDL_GetWindowSurface(window);
-        loadingSurface = OptimizeSurface(imagePath, windowSurfaceTemp);//MAYBE SGV
+        //*SDL_Surface* windowSurfaceTemp = SDL_GetWindowSurface(window);
+        //*SDL_Surface* loadingSurface = OptimizeSurface(imagePath, windowSurfaceTemp);
         //Define rect for size, position of the image src
         srcR.x = x;
         srcR.y = y;
@@ -42,15 +41,15 @@ public:
         DestR.w = w;
         DestR.h = h;
         //Make the texture
-        texture = SDL_CreateTextureFromSurface(Main_Renderer,loadingSurface);
+        //*texture = SDL_CreateTextureFromSurface(renderer,loadingSurface);
+        setTextureFromPath(window,renderer,imagePath);
         //Free surface
-        SDL_FreeSurface(loadingSurface);
+        //*SDL_FreeSurface(loadingSurface);
+        //TODO Free WindowSurface
+        //*SDL_FreeSurface(windowSurfaceTemp);
     }
     ~GraphicOBJ(){
         //Free memory
-    }
-    SDL_Surface* getSurface(){
-        return loadingSurface;
     }
     SDL_Rect* getSrcRect(){
         return &srcR;
@@ -61,6 +60,14 @@ public:
 
     SDL_Texture* getTexture(){
         return texture;
+    }
+    void setTextureFromPath(SDL_Window* window,SDL_Renderer* renderer,string imagePath){//DANGER MAYBE
+        //We load a surface
+        SDL_Surface* windowSurfaceTemp = SDL_GetWindowSurface(window);
+        SDL_Surface* loadingSurface = OptimizeSurface(imagePath, windowSurfaceTemp);
+        texture = SDL_CreateTextureFromSurface(renderer,loadingSurface);
+        SDL_FreeSurface(loadingSurface);
+        SDL_FreeSurface(windowSurfaceTemp);
     }
 
     //Optimiza los surfaces para el tamano adecuado. utilizar al usar una imagen o algo con surface!!!!
@@ -109,7 +116,8 @@ public:
         imagesToRender.push_back(obj);
     }
 
-    void render(){
+    void render(short clearVector){
+        //clartVector defines if the render itself is going to clear imagesToRender vector(1:clean, 0:not clean)
         //Screen render
         //First we blit the objects
         for (int i = 0; i < imagesToRender.size(); ++i) {
@@ -118,6 +126,8 @@ public:
         }
         //The function that makes a flip
         SDL_RenderPresent(Main_Renderer);
+        if(clearVector)
+            cleanVector();
     }
 
     void cleanVector(){

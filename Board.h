@@ -34,6 +34,10 @@ public:
     int profit;
     Player *lastPlayer;
 
+    //Graphics
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+
 public:
     //Pila: Los dominoes para cojer de la mesa
     vector<Domino> dominoesToEat;
@@ -51,7 +55,7 @@ public:
     void dominoesToEatERASE(int idx, Domino* whatToADD){
     }
 
-    Board(unsigned int nPlayers);//CONSTRUCTOR of Board
+    Board(SDL_Window* window,SDL_Renderer* renderer,unsigned int nPlayers);//CONSTRUCTOR of Board
 
     void update();//toma los inputs y define que haces. pone a jugar al personaje que le toca el turno si escogido.
 };

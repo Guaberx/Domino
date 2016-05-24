@@ -10,8 +10,10 @@
 using std::cout;
 using std::endl;
 
-Board::Board(unsigned int nPlayers){
+Board::Board(SDL_Window* windowI,SDL_Renderer* rendererI,unsigned int nPlayers){
     //Constructor
+    window = windowI;
+    renderer = rendererI;
     dominoesToEat = mixedDominoes();
     players = createPlayers(nPlayers);
     dealDominoes();
@@ -39,15 +41,34 @@ vector<Domino> Board::mixedDominoes(){
     //Crear Los Dominoes
     vector<Domino> tempDominoes;
     vector<Domino> tempDominoesToReturn;
-    Domino tempDomino(0,0);
+    Domino tempDomino(7,7);//Dominoe default TODO AQUI
+    vector<string> dominoesPath;
+    dominoesPath.push_back("images/dominoes/00.png");dominoesPath.push_back("images/dominoes/10.png");
+    dominoesPath.push_back("images/dominoes/11.png");dominoesPath.push_back("images/dominoes/20.png");
+    dominoesPath.push_back("images/dominoes/21.png");dominoesPath.push_back("images/dominoes/22.png");
+    dominoesPath.push_back("images/dominoes/30.png");dominoesPath.push_back("images/dominoes/31.png");
+    dominoesPath.push_back("images/dominoes/32.png");dominoesPath.push_back("images/dominoes/33.png");
+    dominoesPath.push_back("images/dominoes/40.png");dominoesPath.push_back("images/dominoes/41.png");
+    dominoesPath.push_back("images/dominoes/42.png");dominoesPath.push_back("images/dominoes/43.png");
+    dominoesPath.push_back("images/dominoes/44.png");dominoesPath.push_back("images/dominoes/50.png");
+    dominoesPath.push_back("images/dominoes/51.png");dominoesPath.push_back("images/dominoes/52.png");
+    dominoesPath.push_back("images/dominoes/53.png");dominoesPath.push_back("images/dominoes/54.png");
+    dominoesPath.push_back("images/dominoes/55.png");dominoesPath.push_back("images/dominoes/60.png");
+    dominoesPath.push_back("images/dominoes/61.png");dominoesPath.push_back("images/dominoes/62.png");
+    dominoesPath.push_back("images/dominoes/63.png");dominoesPath.push_back("images/dominoes/64.png");
+    dominoesPath.push_back("images/dominoes/65.png");dominoesPath.push_back("images/dominoes/66.png");
+
+
     int nDominoes = 28;//Hay 28 fichas en el juego
     for (int i = 0; i <= 6; ++i) {//*******Volver constante tal vez
         for (int j = 0; j <= i; ++j) {
             tempDomino.setTop(i);
             tempDomino.setBot(j);
+            tempDomino.createDominoImagen(window,renderer,dominoesPath.at(i));
             tempDominoes.push_back(tempDomino);
         }
     }
+
     int randomNumber;
     while(!tempDominoes.empty()){
         //Generamos un numero aleatorio entre.  arithmetic exeption, por eso el condicionante
@@ -185,7 +206,7 @@ void Board::update() {
         cout << "\nDominoes at table : " << endl;
         printDominoes(dominoesAtPlay);
         cout << "\nPLAYS: " << players.at(i).name << endl;
-        players.at(i).update(this);
+        players.at(i).update(window,renderer,this);
         cout << "\n\nLast Player: " << lastPlayer->name << endl;
     }
 }

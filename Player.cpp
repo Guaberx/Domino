@@ -77,7 +77,161 @@ int getDominoIdx(vector<Domino> vDominoes, Domino Ddomino){
     }
 }
 
-void Player::placeDominoe(Board* board){
+void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board, unsigned int idxDomino){
+    //Escoje la imagen del domino correspondiente
+    string imagePath;
+    switch (dominoes.at(idxDomino).getTop()){
+        case 0:
+            break;
+        case 1:
+            switch (dominoes.at(idxDomino).getBot()){
+                case 0:
+                    imagePath = "images/dominoes/10.png";
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    imagePath = "images/dominoes/12.png";
+                    break;
+                case 3:
+                    imagePath = "images/dominoes/13.png";
+                    break;
+                case 4:
+                    imagePath = "images/dominoes/14.png";
+                    break;
+                case 5:
+                    imagePath = "images/dominoes/15.png";
+                    break;
+                case 6:
+                    imagePath = "images/dominoes/16.png";
+                    break;
+            }
+            break;
+        case 2:
+            switch (dominoes.at(idxDomino).getBot()){
+                case 0:
+                    imagePath = "images/dominoes/20.png";
+                    break;
+                case 1:
+                    imagePath = "images/dominoes/21.png";
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    imagePath = "images/dominoes/23.png";
+                    break;
+                case 4:
+                    imagePath = "images/dominoes/24.png";
+                    break;
+                case 5:
+                    imagePath = "images/dominoes/25.png";
+                    break;
+                case 6:
+                    imagePath = "images/dominoes/26.png";
+                    break;
+            }
+            break;
+        case 3:
+            switch (dominoes.at(idxDomino).getBot()){
+                case 0:
+                    imagePath = "images/dominoes/30.png";
+                    break;
+                case 1:
+                    imagePath = "images/dominoes/31.png";
+                    break;
+                case 2:
+                    imagePath = "images/dominoes/32.png";
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    imagePath = "images/dominoes/34.png";
+                    break;
+                case 5:
+                    imagePath = "images/dominoes/35.png";
+                    break;
+                case 6:
+                    imagePath = "images/dominoes/36.png";
+                    break;
+            }
+            break;
+        case 4:
+            switch (dominoes.at(idxDomino).getBot()){
+                case 0:
+                    imagePath = "images/dominoes/40.png";
+                    break;
+                case 1:
+                    imagePath = "images/dominoes/41.png";
+                    break;
+                case 2:
+                    imagePath = "images/dominoes/42.png";
+                    break;
+                case 3:
+                    imagePath = "images/dominoes/43.png";
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    imagePath = "images/dominoes/45.png";
+                    break;
+                case 6:
+                    imagePath = "images/dominoes/46.png";
+                    break;
+            }
+            break;
+        case 5:
+            switch (dominoes.at(idxDomino).getBot()){
+                case 0:
+                    imagePath = "images/dominoes/50.png";
+                    break;
+                case 1:
+                    imagePath = "images/dominoes/51.png";
+                    break;
+                case 2:
+                    imagePath = "images/dominoes/52.png";
+                    break;
+                case 3:
+                    imagePath = "images/dominoes/53.png";
+                    break;
+                case 4:
+                    imagePath = "images/dominoes/54.png";
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    imagePath = "images/dominoes/56.png";
+                    break;
+            }
+            break;
+        case 6:
+            switch (dominoes.at(idxDomino).getBot()){
+                case 0:
+                    imagePath = "images/dominoes/60.png";
+                    break;
+                case 1:
+                    imagePath = "images/dominoes/61.png";
+                    break;
+                case 2:
+                    imagePath = "images/dominoes/62.png";
+                    break;
+                case 3:
+                    imagePath = "images/dominoes/63.png";
+                    break;
+                case 4:
+                    imagePath = "images/dominoes/64.png";
+                    break;
+                case 5:
+                    imagePath = "images/dominoes/65.png";
+                    break;
+                case 6:
+                    break;
+            }
+            break;
+    }
+    dominoes.at(idxDomino).setTexture(window,renderer,imagePath);//TODO
+}
+
+void Player::placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board){
     //Hacer algun metodo de SDL para que escoja la ficha
     //Mostrar en el chat las fichas disponibles o hacerlo de algun metodo
     vector<Domino> possible = getPlayableDominoes(board);
@@ -100,7 +254,7 @@ void Player::placeDominoe(Board* board){
         printDominoes(possible);
         cout << "\nEscoje un domino: ";
         cin >> pick;
-    }while (pick>possible.size()-1);//             POR ALGUNA RAZON FUNCIONA :|. si le pongo pick<0 falla. O.o
+    }while (pick<0 || pick>possible.size()-1);//             POR ALGUNA RAZON FUNCIONA :|. si le pongo pick<0 falla. O.o
 
 
     //Escoje a que lado se pone la ficha
@@ -129,20 +283,28 @@ void Player::placeDominoe(Board* board){
     //Poner ficha en el tablero
     switch (pick){
         case 0://El 0 es para agregar a la izquierda
+            //En el caso que esten invertidos para conectarse. se cambian
             if(dominoes.at(idxDomino).getTop() == board->dominoesAtPlay.at(0).getTop()){
                 //Se cambia el orden de los valores del domino para que se inserte correctamente
                 short tempDominoNumber = dominoes.at(idxDomino).getTop();
                 dominoes.at(idxDomino).setTop(dominoes.at(idxDomino).getBot());
                 dominoes.at(idxDomino).setBot(tempDominoNumber);
+
+                //Se cambia la textura del domino //TODO
+                rotateDomino(window,renderer,board,idxDomino);
             }
             board->dominoesAtPlayINSETR(0,&dominoes.at(idxDomino));
             break;
         case 1://El 1 es para agregar a la derecha
+            //En el caso que esten invertidos para conectarse. se cambian
             if(dominoes.at(idxDomino).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()){
                 //Se cambia el orden de los valores del domino para que se inserte correctamente
                 short tempDominoNumber = dominoes.at(idxDomino).getTop();
                 dominoes.at(idxDomino).setTop(dominoes.at(idxDomino).getBot());
                 dominoes.at(idxDomino).setBot(tempDominoNumber);
+
+                //Se cambia la textura del domino //TODO
+                rotateDomino(window,renderer,board,idxDomino);
             }
             board->dominoesAtPlayINSETR(board->dominoesAtPlay.size(),&dominoes.at(idxDomino));
             break;
@@ -150,7 +312,7 @@ void Player::placeDominoe(Board* board){
     dominoes.erase(dominoes.begin()+getDominoIdx(dominoes,possible.at(0)));//Borramos el domino correcpondiente del jugador
 }
 
-void Player::eat(Board* board){
+void Player::eat(SDL_Window* window,SDL_Renderer*renderer,Board* board){
     //El jugador se come el primer domino de la pila de dominoes para comer
     Domino tempDomino(0,0);
     tempDomino = board->dominoesToEat.at(0);
@@ -163,7 +325,7 @@ void Player::eat(Board* board){
                || board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()==tempDomino.getTop()){
 
         //Si la ficha que comio la puede jugar. entonces la juega
-        placeDominoe(board);
+        placeDominoe(window,renderer,board);
         board->lastPlayer = this;
     }else{
         //En el caso que no le sirva la ficha. paga
@@ -172,17 +334,17 @@ void Player::eat(Board* board){
     }
 }
 
-void Player::update(Board* board) {
+void Player::update(SDL_Window* window,SDL_Renderer*renderer,Board* board) {
     //Si el jugador come una ficha y le funciona, puede ponerla. sino, pasa y paga
     //El jugador solo reclama el dinero cuando no ha comido.
     //es decir que si como y puede poner la ficha, igual no reclama el dinero. solo lo reclama cuanto juega de una
     if(getPlayableDominoes(board).empty()){
         cout << name << " Ate a Domino" << endl;
-        eat(board);
+        eat(window,renderer,board);
     }else{
         cash+=board->profit;
         board->profit = 0;
-        placeDominoe(board);
+        placeDominoe(window,renderer,board);
         board->lastPlayer = this;
     }
 }
