@@ -21,6 +21,8 @@ using std::endl;
 class Board;
 
 class Player{
+    GraphicOBJ* Name;
+    GraphicOBJ* Cash;
 public:
     bool playerInTurn;
     bool ate;//Si ya comio una ficha en su turno
@@ -29,8 +31,11 @@ public:
     vector<Domino> dominoes;//Las fichas del jugador
 
     Player();
+    void setName(SDL_Window* window, SDL_Renderer* renderer,string fount,int size,string text);
     vector<Domino> getPlayableDominoes(Board* board);//Dice que dominoes pueden ser jugados por el jugador
+    void KillerEvent(Board*board,SDL_Event ev1,bool* pickingDomino);
     bool placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board, Domino* pickedDomino);//Coloca una ficha en el tablero y se quita de 'dominoes'
+    void placeDominoeEventHandler(SDL_Window* window, SDL_Renderer* renderer,Board* board, bool picking, Domino* pickedDomino);
     void eat(SDL_Window* window,SDL_Renderer*renderer,Board* board);//Come un domino de los dominoes que se pueden comer
 
     //Graphics

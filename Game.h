@@ -18,11 +18,14 @@ class Game{
      */
     vector<Board> boardPile;
     Graphics* graphics;
+    SDL_Window* window;
+    SDL_Renderer* renderer;
 public:
     Game(SDL_Window* window, SDL_Renderer* renderer,Graphics* graphicsI, unsigned int nPlayers);
     ~Game();
 
-    void update();
+    void update(bool* GameState);
+    void setBackground(GraphicOBJ* background);
 };
 
 #endif //PROYECTO_GAME_H

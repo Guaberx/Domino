@@ -7,6 +7,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -21,11 +22,14 @@ class GraphicOBJ{
     SDL_Rect srcR;//Source image rectangle
     SDL_Rect DestR;//Destination rectangle
     SDL_Texture* texture;//We use this one to render on the screen
+    int angle;
 public:
     GraphicOBJ(SDL_Window* window, SDL_Renderer* renderer,string imagePath, int x, int y, int w, int h);
+    GraphicOBJ(SDL_Window* window, SDL_Renderer* renderer,string fount,int size,string text);
     ~GraphicOBJ();
     SDL_Rect* getSrcRect();
     SDL_Rect* getDestRect();
+    int* getAngle();
     void modifySrcRect(int x, int y, int w, int h);
     void modifyDestRect(int x, int y, int w, int h);
 

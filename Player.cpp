@@ -16,6 +16,7 @@
  */
 #include <iostream>
 #include "Player.h"
+#include <sstream>
 
 
 template <class T>
@@ -32,6 +33,10 @@ Player::Player(){
     cash = CASHPERPLAYER;
     ate = false;
     playerInTurn = true;
+}
+
+void Player::setName(SDL_Window* window, SDL_Renderer* renderer,string fount,int size,string text){
+    Name = new GraphicOBJ(window,renderer,fount,size,text);
 }
 
 vector<Domino> Player::getPlayableDominoes(Board* board) {
@@ -263,8 +268,7 @@ void Player::rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board
 }
 
 bool Player::placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board, Domino* pickedDomino){
-    //Hacer algun metodo de SDL para que escoja la ficha
-    //Mostrar en el chat las fichas disponibles o hacerlo de algun metodo
+    //TODO Mostrar en el chat las fichas disponibles o hacerlo de algun metodo
     vector<Domino> possible = getPlayableDominoes(board);
 
     //La ficha que comienza el juego
@@ -275,119 +279,20 @@ bool Player::placeDominoe(SDL_Window* window,SDL_Renderer* renderer,Board* board
         playerInTurn = false;
         return true;
     }
-    cout << name << " :\n";
-    //printDominoes(dominoes);
-    printDominoes(board->dominoesAtPlay);
-
     if(!is_in(pickedDomino,&possible)){
         return false;
     }
-
-    int possibleIdx = getDominoIdx(&possible,pickedDomino);
-    int dominoesIdx = getDominoIdx(&dominoes,pickedDomino);
-
+    if(!ate)
+    cash+=board->profit;//Se lleva lo que han perdido los otros jugadores si no ha comido en su ronda
+    cout << name << " Domino Escojido:\n\t";
+    cout << pickedDomino->getTop() << "," << pickedDomino->getBot() << endl;
     playerInTurn = false;
     ate = false;
-
-    //Booleanos para comprovar las conexiones con las fichas del tablero
-    bool top_top, bot_top, top_bot, bot_bot;
-    top_top = dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(0).getTop();//top<->top primer elemento (0)
-    bot_top = dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(0).getTop();//bot<->top primer elemento (0)
-    top_bot = dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//top<->bot ultimo elemento (1)
-    bot_bot = dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//bot<->bot ultimo elemento (1)
-
-    //Checkea a que lado poner la ficha
     bool pickingDomino = true;
-    SDL_Event ev1;
-    cout << "Escoja un lado para poner su domino!" << endl;
-    while(pickingDomino){
-        while(SDL_PollEvent(&ev1) != 0) {
-            if (ev1.type == SDL_QUIT) exit(0);
-            if (ev1.type == SDL_MOUSEBUTTONDOWN) {
-                GraphicOBJ* tempGraphicOBJ = board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getGraphicOBJ();
-                //Si el mouse da click a la derecha de las fichas.
-                if(ev1.button.x > tempGraphicOBJ->getDestRect()->x + tempGraphicOBJ->getDestRect()->w){
-                    if(top_bot || bot_bot){
-                        //TODO AQUI LOGICA DE QUE HACE AL VALIDAR ESTE LADO
-                        if(dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()){
-                            //Se cambia el orden de los valores del domino para que se inserte correctamente
-                            short tempDominoNumber = dominoes.at(dominoesIdx).getTop();
-                            dominoes.at(dominoesIdx).setTop(dominoes.at(dominoesIdx).getBot());
-                            dominoes.at(dominoesIdx).setBot(tempDominoNumber);
+    //Checkea a que lado poner la ficha
+    placeDominoeEventHandler(window, renderer, board,pickingDomino, pickedDomino);
 
-                            //Se cambia la textura del domino //TODO
-                            rotateDomino(window,renderer,board,dominoesIdx);
-                        }
-                        //Insertamos el domino en el tablero
-                        board->dominoesAtPlayINSETR(board->dominoesAtPlay.size(),&dominoes.at(dominoesIdx));
-                        //Borramos el domino de nuestras fichas
-                        dominoes.erase(dominoes.begin()+dominoesIdx);
-                        //Actualizamos el ultimo jugador
-                        board->lastPlayer = this;
-                        pickingDomino = false;
-                        break;
-                    }
-                    //Si el mouse da click a la izquierda de las fichas.
-                }else if(ev1.button.x < tempGraphicOBJ->getDestRect()->x){
-                    if(top_top || bot_top){
-                        //TODO AQUI LOGICA DE QUE HACE AL VALIDAR ESTE LADO
-                        if(dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(0).getTop()){
-                            //Se cambia el orden de los valores del domino para que se inserte correctamente
-                            short tempDominoNumber = dominoes.at(dominoesIdx).getTop();
-                            dominoes.at(dominoesIdx).setTop(dominoes.at(dominoesIdx).getBot());
-                            dominoes.at(dominoesIdx).setBot(tempDominoNumber);
-
-                            //Se cambia la textura del domino //TODO
-                            rotateDomino(window,renderer,board,dominoesIdx);
-                        }
-                        //Insertamos el domino en el tablero
-                        board->dominoesAtPlayINSETR(0,&dominoes.at(dominoesIdx));
-                        //Borramos el domino de nuestras fichas
-                        dominoes.erase(dominoes.begin()+dominoesIdx);
-                        //Actualizamos el ultimo jugador
-                        board->lastPlayer = this;
-                        pickingDomino = false;
-                        break;
-                    }
-                }
-            }
-            SDL_Delay(50);
-        }
-    }
-    cout << "FUNCTION ENDS!!!\n";
-    /*//Escoje a que lado se pone la ficha
-
-    //Poner ficha en el tablero
-    switch (pick){
-        case 0://El 0 es para agregar a la izquierda
-            //En el caso que esten invertidos para conectarse. se cambian
-            if(dominoes.at(idxDomino).getTop() == board->dominoesAtPlay.at(0).getTop()){
-                //Se cambia el orden de los valores del domino para que se inserte correctamente
-                short tempDominoNumber = dominoes.at(idxDomino).getTop();
-                dominoes.at(idxDomino).setTop(dominoes.at(idxDomino).getBot());
-                dominoes.at(idxDomino).setBot(tempDominoNumber);
-
-                //Se cambia la textura del domino //TODO
-                rotateDomino(window,renderer,board,idxDomino);
-            }
-            board->dominoesAtPlayINSETR(0,&dominoes.at(idxDomino));
-            break;
-        case 1://El 1 es para agregar a la derecha
-            //En el caso que esten invertidos para conectarse. se cambian
-            if(dominoes.at(idxDomino).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()){
-                //Se cambia el orden de los valores del domino para que se inserte correctamente
-                short tempDominoNumber = dominoes.at(idxDomino).getTop();
-                dominoes.at(idxDomino).setTop(dominoes.at(idxDomino).getBot());
-                dominoes.at(idxDomino).setBot(tempDominoNumber);
-
-                //Se cambia la textura del domino //TODO
-                rotateDomino(window,renderer,board,idxDomino);
-            }
-            board->dominoesAtPlayINSETR(board->dominoesAtPlay.size(),&dominoes.at(idxDomino));
-            break;
-    }
-    dominoes.erase(dominoes.begin()+getDominoIdx(dominoes,possible.at(0)));//Borramos el domino correcpondiente del jugador
-*/}
+}
 
 void Player::eat(SDL_Window* window,SDL_Renderer*renderer,Board* board){
     //El jugador se come el primer domino de la pila de dominoes para comer
@@ -399,6 +304,97 @@ void Player::eat(SDL_Window* window,SDL_Renderer*renderer,Board* board){
     ate = true;
 }
 
+void Player::KillerEvent(Board*board,SDL_Event ev1,bool* pickingDomino){
+    if(ev1.button.x>board->DeshacerRonda->getDestRect()->x &&
+       ev1.button.y<board->DeshacerRonda->getDestRect()->y+board->DeshacerRonda->getDestRect()->h){
+        //TODO REVISAR
+        if(pickingDomino!=NULL)
+            *pickingDomino = false;
+        playerInTurn = false;
+        board->keepPlaying = false;
+    }
+}
+
+void Player::placeDominoeEventHandler(SDL_Window* window, SDL_Renderer* renderer,Board* board, bool picking, Domino* pickedDomino){
+    //Booleanos para comprovar las conexiones con las fichas del tablero
+    int dominoesIdx = getDominoIdx(&dominoes,pickedDomino);
+    bool top_top, bot_top, top_bot, bot_bot;
+    top_top = dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(0).getTop();//top<->top primer elemento (0)
+    bot_top = dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(0).getTop();//bot<->top primer elemento (0)
+    top_bot = dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//top<->bot ultimo elemento (1)
+    bot_bot = dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot();//bot<->bot ultimo elemento (1)
+    bool pickingDomino = picking;
+    SDL_Event ev1;
+    cout << "Escoja un lado para poner su domino!" << endl;
+    while(pickingDomino){
+        while(SDL_PollEvent(&ev1) != 0) {
+            //TODO HACER FUNCION DE BOARD DE RETROCEDER EN JUEGO
+            if (ev1.type == SDL_QUIT) exit(0);
+            if (ev1.type == SDL_MOUSEBUTTONDOWN) {
+                KillerEvent(board,ev1,&pickingDomino);
+                GraphicOBJ* tempGraphicOBJ = board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getGraphicOBJ();
+                //Si el mouse da click a la derecha de las fichas.
+                if(ev1.button.x > tempGraphicOBJ->getDestRect()->x + tempGraphicOBJ->getDestRect()->w && ev1.button.y<400){
+                    if(top_bot || bot_bot){
+                        //TODO AQUI LOGICA DE QUE HACE AL VALIDAR ESTE LADO
+                        if(dominoes.at(dominoesIdx).getBot() == board->dominoesAtPlay.at(board->dominoesAtPlay.size()-1).getBot()){
+                            //TODO ROTAMOS LA IMAGEN
+                            *(dominoes.at(dominoesIdx).getGraphicOBJ()->getAngle())+=180;
+                            //TODO LO DE ABAJO SIRVE
+
+                            //Se cambia el orden de los valores del domino para que se inserte correctamente
+                            short tempDominoNumber = dominoes.at(dominoesIdx).getTop();
+                            dominoes.at(dominoesIdx).setTop(dominoes.at(dominoesIdx).getBot());
+                            dominoes.at(dominoesIdx).setBot(tempDominoNumber);
+
+                            //Se cambia la textura del domino //TODO
+                            /*rotateDomino(window,renderer,board,dominoesIdx);*/
+                        }
+                        //Insertamos el domino en el tablero
+                        board->dominoesAtPlayINSETR(board->dominoesAtPlay.size(),&dominoes.at(dominoesIdx));
+                        //Borramos el domino de nuestras fichas
+                        dominoes.erase(dominoes.begin()+dominoesIdx);
+                        //Actualizamos el ultimo jugador
+                        board->lastPlayer = this;
+                        pickingDomino = false;
+                        break;
+                    }
+                    //Si el mouse da click a la izquierda de las fichas.
+                }else if(ev1.button.x < tempGraphicOBJ->getDestRect()->x && ev1.button.y<400){
+                    if(top_top || bot_top){
+                        //TODO AQUI LOGICA DE QUE HACE AL VALIDAR ESTE LADO
+                        if(dominoes.at(dominoesIdx).getTop() == board->dominoesAtPlay.at(0).getTop()){
+                            *(dominoes.at(dominoesIdx).getGraphicOBJ()->getAngle())+=180;
+                            //TODO LO DE ABAJO SIRVE
+
+                            //Se cambia el orden de los valores del domino para que se inserte correctamente
+                            short tempDominoNumber = dominoes.at(dominoesIdx).getTop();
+                            dominoes.at(dominoesIdx).setTop(dominoes.at(dominoesIdx).getBot());
+                            dominoes.at(dominoesIdx).setBot(tempDominoNumber);
+
+                            //Se cambia la textura del domino //TODO
+                            /*rotateDomino(window,renderer,board,dominoesIdx);*/
+                        }
+                        //Insertamos el domino en el tablero
+                        board->dominoesAtPlayINSETR(0,&dominoes.at(dominoesIdx));
+                        //Borramos el domino de nuestras fichas
+                        dominoes.erase(dominoes.begin()+dominoesIdx);
+                        //Actualizamos el ultimo jugador
+                        board->lastPlayer = this;
+                        pickingDomino = false;
+                        break;
+                    }
+                }else if (ev1.button.x>50 && ev1.button.x<250 && ev1.button.y>425 && ev1.button.y<550){
+                    //Si desea escoger otro domino
+                    cout << "El domino ha sido des-seleccionado" << endl;
+                    playerInTurn = true;
+                    pickingDomino = false;
+                }
+            }
+            SDL_Delay(20);
+        }
+    }
+}
 
 void Player::eventHandler(SDL_Window* window,SDL_Renderer*renderer,Graphics* graphics,Board* board){
     /*
@@ -423,6 +419,7 @@ void Player::eventHandler(SDL_Window* window,SDL_Renderer*renderer,Graphics* gra
             while(SDL_PollEvent(&ev) != 0) {
                 if (ev.type == SDL_QUIT) exit(0);
                 if (ev.type == SDL_MOUSEBUTTONDOWN) {
+                    KillerEvent(board,ev, NULL);
                     //Para las imagenes
                     for (int k = 0; k < dominoes.size(); ++k) {
                         //Si se encuentra dentro de las dimensiones del objeto
@@ -431,7 +428,6 @@ void Player::eventHandler(SDL_Window* window,SDL_Renderer*renderer,Graphics* gra
                             && ev.button.y >= dominoes.at(k).getGraphicOBJ()->getDestRect()->y && ev.button.y <= dominoes.at(
                                 k).getGraphicOBJ()->getDestRect()->y + dominoes.at(k).getGraphicOBJ()->getDestRect()->h) {
                             //TODO AQUI LO QUE PASA!!!
-                            cout<<"si nena\n";
                             placeDominoe(window,renderer,board,&dominoes.at(k));
                         }
                     }
@@ -446,7 +442,7 @@ void Player::objectsModifier(Graphics* graphics,Board* board){
      * Esta Funcion Actualiza GraphicOBJ de las fichas del jugador y del tablero
      */
 
-    //Render Dominoes
+    //Render Dominoes(Logica)
     int modifier = DOMINOSIZE_W+DISTANCEINBETWEEN;//Sirve para colocar los objetos en la pantalla ordenadamente
     for (int j = 0; j < dominoes.size(); ++j) {
         int wOfRect = dominoes.at(j).getGraphicOBJ()->getDestRect()->w;
@@ -455,14 +451,22 @@ void Player::objectsModifier(Graphics* graphics,Board* board){
         modifier += DOMINOSIZE_W+DISTANCEINBETWEEN;
     }
 
-    //Render DominoesAtPlay
+    //Render DominoesAtPlay(Logica)
     modifier = DOMINOSIZE_W+DISTANCEINBETWEEN;
     for (int j = 0; j < board->dominoesAtPlay.size(); ++j) {
         int wOfRect = board->dominoesAtPlay.at(j).getGraphicOBJ()->getDestRect()->w;
         int hOfRect = board->dominoesAtPlay.at(j).getGraphicOBJ()->getDestRect()->h;
-        board->dominoesAtPlay.at(j).getGraphicOBJ()->modifyDestRect(300+modifier,300,wOfRect,hOfRect);
+        board->dominoesAtPlay.at(j).getGraphicOBJ()->modifyDestRect(50+modifier,300,wOfRect,hOfRect);
         modifier += DOMINOSIZE_W+DISTANCEINBETWEEN;
     }
+
+    //Texto
+    Name->getDestRect()->x=50;
+    Cash->getDestRect()->x=Name->getDestRect()->x+Name->getDestRect()->w+50;
+
+    //Aqui se anaden al render los objetos
+    if(board->Background!=NULL)
+        graphics->imagesToRenderPUSH_BACK(*board->Background);
 
     //We add the dominoes graphicOBJS to graphics
     renderPlayerDominoes(graphics);
@@ -471,8 +475,18 @@ void Player::objectsModifier(Graphics* graphics,Board* board){
         graphics->imagesToRenderPUSH_BACK(*board->dominoesAtPlay.at(i).getGraphicOBJ());
     }
 
-}
+    //Otros
 
+    graphics->imagesToRenderPUSH_BACK(*board->SelectOtherDomino);
+    graphics->imagesToRenderPUSH_BACK(*board->DeshacerRonda);
+
+    //Nombre del jugador
+    graphics->imagesToRenderPUSH_BACK(*Name);
+    if(Cash!=NULL)
+        graphics->imagesToRenderPUSH_BACK(*Cash);
+
+    //Boton para cancelar accion
+}
 
 void Player::update(SDL_Window* window,SDL_Renderer*renderer,Graphics* graphics,Board* board) {
     /*
@@ -480,12 +494,20 @@ void Player::update(SDL_Window* window,SDL_Renderer*renderer,Graphics* graphics,
      * Primero toma lee los eventos, luego modifica los objetos para mostrarlos en pantalla correctamente
      * y luego los renderiza
      */
+    std::stringstream cashString;
+    cashString << cash;
+    Cash = new GraphicOBJ(window,renderer,"images/Suissnord.otf",40,"$: "+cashString.str());
     playerInTurn = true;
     while (playerInTurn){
         eventHandler(window,renderer,graphics,board);
         objectsModifier(graphics,board);
         //We render the OBJs
         graphics->render(1);
+    }
+    if(dominoes.size()<1){
+        cout << "El Jugador " << name << " Gano el Juego" << endl << endl;
+        board->winner = true;
+        board->keepPlaying = false;
     }
 }
 

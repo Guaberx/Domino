@@ -20,13 +20,21 @@
 using namespace std;
 
 int main(int argc, char * argv[]) {
-    string string1 = "TEST";
-    const char* charstring = string1.c_str();//Transforma un string en un char*
-    int repeticiones = strlen(charstring);//Consigue el lenght de un char[]
-
+    //TODO: Developer mode, Artificial inteligence, End of game
     //Inicializamos SDL y checkeamos errores
+    int njugadores = 0;
+    do{
+        cout <<"\tCuantos Jugadores van a jugar? ";
+        cin >> njugadores;
+        cout << endl;
+    }while(njugadores<=0 || njugadores>=5);
+
     if(SDL_Init(SDL_INIT_EVERYTHING)!=0){
         cout << "Ha salido algo mal en la inicializacion de SDL" << SDL_GetError();
+        exit(1);
+    }
+    if(TTF_Init()!=0){
+        cout << "Ha salido algo mal en la inicializacion de TTF" << SDL_GetError();
         exit(1);
     }
     //Creamos la ventana
@@ -41,10 +49,11 @@ int main(int argc, char * argv[]) {
 
     srand(time(NULL));//Initialize random seed for rand()
     Graphics graphics(window,Main_Renderer);
-    Game* juego = new Game(window,Main_Renderer,&graphics,3);//Nuevo juego con 3 Jugadores. es un puntero para poder crear juegos nuevos
+    Game* juego = new Game(window,Main_Renderer,&graphics,njugadores);//Nuevo juego con 3 Jugadores. es un puntero para poder crear juegos nuevos
 
     //Se meten imagenes para renderizarlas
     GraphicOBJ Background(window,Main_Renderer,"images/Background.png",0,0,RESOLUTION_W,RESOLUTION_H);
+    juego->setBackground(&Background);
     /*
      *
      */
@@ -63,14 +72,14 @@ int main(int argc, char * argv[]) {
         //Game logic
         //Update graficos
         //ADD Graphic object to render TODO It is a must to add the graphicOBJ everyloop!!!!
-        graphics.imagesToRenderPUSH_BACK(Background);
-        juego->update();
+        juego->update(&isRunning);
         //graphics.render(1);//TA FUNCIONA//El 1 es para que haga flip en las texturas
     }
 
     SDL_Delay(20);
     //SDL_DestroyRenderer(Main_Renderer);
     //SDL_DestroyWindow(window);
+    IMG_Quit();
     SDL_Quit();
     return 0;
 

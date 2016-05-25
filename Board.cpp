@@ -13,6 +13,8 @@ using std::endl;
 Board::Board(SDL_Window* windowI,SDL_Renderer* rendererI,Graphics* graphicsI, unsigned int nPlayers){
     //Constructor
     lastPlayer = NULL;
+    keepPlaying = true;
+    winner = false;
     profit = 0;
     window = windowI;
     renderer = rendererI;
@@ -21,6 +23,15 @@ Board::Board(SDL_Window* windowI,SDL_Renderer* rendererI,Graphics* graphicsI, un
     players = createPlayers(nPlayers);
     dealDominoes();
     orderOfPlayers();
+    for (int i = 0; i < players.size(); ++i) {
+        players.at(i).setName(window,renderer,"images/Suissnord.otf",40,players.at(i).name);
+    }
+    SelectOtherDomino = new GraphicOBJ(window,renderer,"images/se.png",50,425,200,125);
+    DeshacerRonda = new GraphicOBJ(window,renderer,"images/Ball.bmp",50,425,200,125);
+    DeshacerRonda->getDestRect()->x = 800;
+    DeshacerRonda->getDestRect()->y = 0;
+    DeshacerRonda->getDestRect()->w = 180;
+    DeshacerRonda->getDestRect()->h = 100;
 }
 
 //Esta Funcion Globalmente sirve
@@ -100,6 +111,7 @@ vector<Player> Board::createPlayers(unsigned int nPlayers){
         newPlayer.name = nombre += (i+49);//Nombre del jugador. no hay jugador 0. alt 49 = 1, 50 = 2...
         tempPlayers.push_back(newPlayer);
     }
+    //TODO ADD BOT
     return tempPlayers;
 }
 
@@ -221,11 +233,32 @@ void Board::changeBackground(GraphicOBJ *newBackground) {
 }
 
 void Board::update() {
-    for (int i = 0; i < players.size(); ++i) {
+    keepPlaying = true;
+    for (int i = 0; i < players.size() && keepPlaying; ++i) {
         /*cout << "\nDominoes at table : " << endl;
         printDominoes(dominoesAtPlay);
         cout << "\nPLAYS: " << players.at(i).name << endl;*/
         players.at(i).update(window,renderer,graphics,this);
-        //TODO cout << "\n\nLast Player: " << lastPlayer->name << endl;
     }
 }
+
+void Board::booblePrint() {
+    Player jugadores[players.size()];
+    Player temp;
+    for (int k = 0; k < players.size(); ++k) {
+        jugadores[k] = players.at(k);
+    }
+    for (int i = 0; i < players.size(); ++i) {
+        for (int j = 0; j < players.size() - 1; ++j) {
+            if (jugadores[j].cash<jugadores[j+1].cash){
+                temp = jugadores[j];
+                jugadores[j] = jugadores[j+1];
+                jugadores[j+1] = temp;
+            }
+        }
+    }
+    for (int l = 0; l < players.size(); ++l) {
+        cout << "\tPosicion por dinero: " << l+1 << " " << jugadores[l].name << " $" << jugadores[l].cash<<endl;
+    }
+}
+

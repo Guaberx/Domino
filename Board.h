@@ -38,6 +38,8 @@ public:
     //El ultimo jugador en poner ficha. se utiliza para ver cuanto le pagan
     int profit;
     Player *lastPlayer;
+    bool keepPlaying;//Sirve para terminar el for para poder retroceder una ronda
+    bool winner;
 
     /*Dice si el jugador no ha completado su turno
      *entonces se sigue haciendo el loop hasta que realice una accion(evento)
@@ -46,6 +48,9 @@ public:
 
     //El fondo del tablero. para renderizarlo
     GraphicOBJ* Background;
+    //Botones
+    GraphicOBJ* SelectOtherDomino;
+    GraphicOBJ* DeshacerRonda;
 
     //Pila: Los dominoes para cojer de la mesa
     vector<Domino> dominoesToEat;
@@ -56,6 +61,8 @@ public:
     void dominoesAtPlayERASE(int idx, Domino* whatToADD);
     void dominoesToEatINSETR(int idx, Domino* whatToADD);
     void dominoesToEatERASE(int idx, Domino* whatToADD);
+
+    void booblePrint();//Imprime los jugadores comenzando con el que tiene mas dinero
 
     void changeBackground(GraphicOBJ *newBackground);
 

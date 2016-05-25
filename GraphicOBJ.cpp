@@ -5,19 +5,36 @@
 #include "GraphicOBJ.h"
 
 GraphicOBJ::GraphicOBJ(SDL_Window* window, SDL_Renderer* renderer,string imagePath, int x, int y, int w, int h){
-modifySrcRect(x,y,w,h);
-modifyDestRect(x,y,w,h);
-//Make the texture
-setTextureFromPath(window,renderer,imagePath);
+    angle = 0;
+    modifySrcRect(x,y,w,h);
+    modifyDestRect(x,y,w,h);
+    //Make the texture
+    setTextureFromPath(window,renderer,imagePath);
 }
+
+GraphicOBJ::GraphicOBJ(SDL_Window* window, SDL_Renderer* renderer,string fountPath,int size,string text){
+    angle = 0;
+    SDL_Color clfg = {255,255,255,0};//Se puede cambiar luego para recibir mas colores
+    TTF_Font* fount = TTF_OpenFont(fountPath.c_str(),size);
+    SDL_Surface* fountSurface = TTF_RenderText_Solid(fount,text.c_str(),clfg);
+    texture = SDL_CreateTextureFromSurface(renderer,fountSurface);
+    //Rect
+    DestR.x = DestR.y = 0;
+    SDL_QueryTexture(texture,NULL,NULL,&DestR.w,&DestR.h);
+
+    SDL_FreeSurface(fountSurface);
+}
+
 GraphicOBJ::~GraphicOBJ(){
-    //Free memory
 }
 SDL_Rect* GraphicOBJ::getSrcRect(){
     return &srcR;
 }
 SDL_Rect* GraphicOBJ::getDestRect(){
     return &DestR;
+}
+int* GraphicOBJ::getAngle(){
+    return &angle;
 }
 
 void GraphicOBJ::modifySrcRect(int x, int y, int w, int h){

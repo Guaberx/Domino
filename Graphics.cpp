@@ -28,9 +28,10 @@ void Graphics::render(bool clearVector){
         exit(1);
     }
 
+    SDL_RenderClear(Main_Renderer);
     for (int i = 0; i < imagesToRender.size(); ++i) {
-        SDL_RenderCopy(Main_Renderer,imagesToRender.at(i).getTexture(),
-                       NULL,imagesToRender.at(i).getDestRect());
+        SDL_RenderCopyEx(Main_Renderer,imagesToRender.at(i).getTexture(),
+                         NULL,imagesToRender.at(i).getDestRect(),*imagesToRender.at(i).getAngle(),NULL,SDL_FLIP_NONE);
     }
     //The function that makes a flip
     SDL_RenderPresent(Main_Renderer);
