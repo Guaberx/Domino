@@ -34,6 +34,10 @@ int main(int argc, char * argv[]) {
                                RESOLUTION_W,RESOLUTION_H,SDL_WINDOW_OPENGL);
     //Creamos el renderer
     SDL_Renderer* Main_Renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+    //Optimizaciones
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    SDL_RenderSetLogicalSize(Main_Renderer, RESOLUTION_W, RESOLUTION_H);
+
 
     srand(time(NULL));//Initialize random seed for rand()
     Graphics graphics(window,Main_Renderer);

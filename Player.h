@@ -22,6 +22,7 @@ class Board;
 
 class Player{
 public:
+    bool playerInTurn;
     bool ate;//Si ya comio una ficha en su turno
     string name;
     int cash;
@@ -34,6 +35,10 @@ public:
 
     //Graphics
     void rotateDomino(SDL_Window* window,SDL_Renderer* renderer,Board* board, unsigned int idxDomino);
+
+    void eventHandler(SDL_Window* window,SDL_Renderer*renderer,Graphics* graphics,Board* board);
+
+    void objectsModifier(Graphics* graphics,Board* board);
 
     void renderPlayerDominoes(Graphics* graphics){
         //Mete todos los objetos a renderizar en graphics

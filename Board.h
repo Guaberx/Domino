@@ -42,23 +42,22 @@ public:
     /*Dice si el jugador no ha completado su turno
      *entonces se sigue haciendo el loop hasta que realice una accion(evento)
      */
-    bool playerInTurn;
+    //bool playerInTurn;
+
+    //El fondo del tablero. para renderizarlo
+    GraphicOBJ* Background;
 
     //Pila: Los dominoes para cojer de la mesa
     vector<Domino> dominoesToEat;
     //Los dominoes que estan en juego en la mesa
     vector<Domino> dominoesAtPlay;//Los dominoes en la mesa que ya se han puesto
 
-    void dominoesAtPlayINSETR(int idx, Domino* whatToADD){
-        dominoesAtPlay.insert(dominoesAtPlay.begin()+idx,*whatToADD);
-    }
-    void dominoesAtPlayERASE(int idx, Domino* whatToADD){
-    }
-    void dominoesToEatINSETR(int idx, Domino* whatToADD){
-        dominoesAtPlay.insert(dominoesAtPlay.begin()+idx,*whatToADD);
-    }
-    void dominoesToEatERASE(int idx, Domino* whatToADD){
-    }
+    void dominoesAtPlayINSETR(int idx, Domino* whatToADD);
+    void dominoesAtPlayERASE(int idx, Domino* whatToADD);
+    void dominoesToEatINSETR(int idx, Domino* whatToADD);
+    void dominoesToEatERASE(int idx, Domino* whatToADD);
+
+    void changeBackground(GraphicOBJ *newBackground);
 
     Board(SDL_Window* window,SDL_Renderer* renderer,Graphics* graphics,unsigned int nPlayers);//CONSTRUCTOR of Board
 

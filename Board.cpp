@@ -12,7 +12,6 @@ using std::endl;
 
 Board::Board(SDL_Window* windowI,SDL_Renderer* rendererI,Graphics* graphicsI, unsigned int nPlayers){
     //Constructor
-    playerInTurn = true;
     lastPlayer = NULL;
     profit = 0;
     window = windowI;
@@ -64,20 +63,22 @@ vector<Domino> Board::mixedDominoes(){
 
 
     int nDominoes = 28;//Hay 28 fichas en el juego
-    for (int i = 0; i <= 6; ++i) {//*******Volver constante tal vez
+    //Se crean los dominoes
+    for (int i = 0; i <= 6; ++i) {
         for (int j = 0; j <= i; ++j) {
             tempDomino.setTop(i);
             tempDomino.setBot(j);
             tempDominoes.push_back(tempDomino);
         }
     }
+    //Se le agregan texturas a los dominoes
     for (int k = 0; k < tempDominoes.size(); ++k) {
         tempDominoes.at(k).createDominoImage(window,renderer,dominoesPath.at(k));
     }
 
     int randomNumber;
     while(!tempDominoes.empty()){
-        //Generamos un numero aleatorio entre.  arithmetic exeption, por eso el condicionante
+        //Generamos un numero aleatorio entre.  arithmetic exeption, por eso el condicionante, para no dividir entre 0
         nDominoes==0? randomNumber=0:randomNumber = rand()%nDominoes;
         //Metemos en el vector a retornar un elemento aleatorio
         tempDomino = tempDominoes[randomNumber];
@@ -114,10 +115,6 @@ void Board::dealDominoes(){
         dealN++;//Se actualiza el contador
     }
     std::cout << "\n\tSe han repartido los dominoes a todos los Jugadores" << std::endl;
-    /*for (int j = 0; j < players.size(); ++j) {
-        std::cout << "\n\t" << players.at(j).name <<": \n";//j+1 porque no hay jugador 0
-        printDominoes(players[j].dominoes);
-    }*/
     std::cout << std::endl;
 }
 
@@ -207,13 +204,27 @@ void Board::orderOfPlayers(){
 
 }
 
+void Board::dominoesAtPlayINSETR(int idx, Domino* whatToADD){
+    dominoesAtPlay.insert(dominoesAtPlay.begin()+idx,*whatToADD);
+}
+void Board::dominoesAtPlayERASE(int idx, Domino* whatToADD){
+}
+void Board::dominoesToEatINSETR(int idx, Domino* whatToADD){
+    dominoesAtPlay.insert(dominoesAtPlay.begin()+idx,*whatToADD);
+}
+void Board::dominoesToEatERASE(int idx, Domino* whatToADD){
+}
+
+void Board::changeBackground(GraphicOBJ *newBackground) {
+    Background = newBackground;
+    cout << "Se ha cambiado el fondo de pantalla" <<endl;
+}
+
 void Board::update() {
     for (int i = 0; i < players.size(); ++i) {
         /*cout << "\nDominoes at table : " << endl;
         printDominoes(dominoesAtPlay);
         cout << "\nPLAYS: " << players.at(i).name << endl;*/
-        playerInTurn = true;
-        while(playerInTurn)
         players.at(i).update(window,renderer,graphics,this);
         //TODO cout << "\n\nLast Player: " << lastPlayer->name << endl;
     }
